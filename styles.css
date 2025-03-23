@@ -20,10 +20,21 @@ header {
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #000;
+    text-decoration: none;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
     position: relative;
-}
+  }
+  
+  .logo-highlight {
+    color: #ffeb00; /* 노란색 강조 */
+    background-color: #000;
+    padding: 0 6px;
+    border-radius: 4px;
+  }
+  
 
 .logo span {
     background-color: yellow;
@@ -47,6 +58,98 @@ nav ul li a {
     font-weight: 500;
 }
 
+/* 기본 메뉴 스타일 */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    position: relative;
+  }
+  
+  .nav-links li {
+    position: relative;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    display: inline-block;
+    font-weight: 500;
+  }
+  
+/* 드롭다운 메뉴 스타일 */
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-toggle {
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .dropdown-toggle:hover {
+    color: #ffc107;
+  }
+
+
+/* 드롭다운 메뉴 숨김 기본 */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    min-width: 120px; /* 최소 너비 설정 (너무 넓지 않게) */
+    padding: 0.5rem 11px;
+    white-space: nowrap;
+    /* max-height: 500px; */
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dropdown-menu a:hover {
+    background-color: #343a40; /* 어두운 회색 배경 */
+    color: #000;               /* 흰색 텍스트 */
+    font-weight: 600;
+    padding-left: 1.2rem;
+  }
+  /* 열릴 때 */
+.dropdown.active .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li a {
+    padding: 1px;
+    display: block;
+    white-space: nowrap;
+    color: #333;
+    
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #cec3c3;
+  }
+  
+  .dropdown.open .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+  }
+  
+
 .contact-btn {
     background-color: #ffeb00;
     padding: 1px 15px;
@@ -59,6 +162,63 @@ nav ul li a {
     justify-content: center;
     gap: 5px;
 }
+
+.price-section {
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .price-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    color: #ccc;
+    margin-bottom: 40px;
+  }
+  
+  .price-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .price-card {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    width: 360px;
+    height: 290px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .price-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .price-card img {
+    width: 160px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .price-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  
+  .tag {
+    color: #ffe100;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+
 
 /* Swiper 슬라이드 스타일 */
 .swiper-container {
@@ -534,3 +694,276 @@ nav ul li a {
     color: #999;
     margin-top: 15px;
 }
+
+
+.lineup-banner {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: 300px;      /* 원하는 세로 크기 */
+    object-fit: cover;  /* 꽉 차게, 비율 유지하며 잘라냄 */
+  }
+
+  
+  .banner-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .banner-content p {
+    font-size: 1.25rem;
+    color: #ddd;
+  }
+  
+  .lineup-section {
+    background-color: #121212;
+    color: white;
+    padding: 14rem 5%;
+    text-align: center;
+  } 
+  .lineup-section {
+    background-color: #111;
+    padding: 80px 0;
+    text-align: center;
+  }
+  
+  .lineup-container-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .lineup-box {
+    margin-bottom: 60px; /* 박스 사이 간격 */
+  }
+  
+  .lineup-box:last-child {
+    margin-bottom: 0; /* 마지막 박스는 간격 제거 */
+  }
+  
+  .lineup-box img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .lineup-intro h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lineup-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+  
+  .lineup-card {
+    background-color: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .lineup-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .lineup-card img {
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lineup-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+
+  
+  
+  .section {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .section h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .section p {
+    text-align: center;
+    color: #ccc;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+  }
+  
+  .highlight {
+    color: #ffeb00;
+    font-weight: bold;
+  }
+  
+  .guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #1c1c1c;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 3rem;
+  }
+  
+  .guide-step {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #222;
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+  
+  .guide-step span {
+    font-weight: bold;
+    color: #ffeb00;
+  }
+  
+  .price-table {
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .price-item:last-child {
+    border-bottom: none;
+  }
+  
+  .price-label {
+    font-weight: bold;
+  }
+  
+  .price-value {
+    color: #ffeb00;
+  }
+  
+  .faq {
+    margin-top: 3rem;
+  }
+  
+  .faq-item {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .faq-item h4 {
+    margin: 0;
+    color: #ffeb00;
+  }
+  
+  .faq-item p {
+    margin-top: 0.5rem;
+    color: #ccc;
+  }
+  
+  @media (max-width: 768px) {
+    .guide-step, .price-item {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+
+  .mico-price-section {
+    padding: 4rem 2rem;
+    background-color: #181818;
+    color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .mico-price-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .mico-price-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .mico-price-card {
+    display: flex;
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .mico-price-image img {
+    width: 100px;
+    height: auto;
+  }
+  
+  .mico-price-info {
+    flex: 1;
+    margin-left: 2rem;
+  }
+  
+  .mico-price-info h3 {
+    font-size: 1.3rem;
+    color: #ffeb00;
+    margin-bottom: 1rem;
+  }
+  
+  .mico-price-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mico-price-info li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .mico-price-info .total span {
+    font-weight: bold;
+    color: #fff;
+  }
+  

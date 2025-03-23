@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>미코팀 | 작업현황</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">미코팀</a>
+    <nav>
+        <ul class="nav-links">
+          <li><a href="lineup.html">기사 라인업</a></li>
+      
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">가격표</a>
+            <ul class="dropdown-menu">
+              <li><a href="price-delegation.html">대리 가격</a></li>
+              <li><a href="price-duo.html">듀오 가격</a></li>
+              <li><a href="price-placement.html">배치 고사</a></li>
+              <li><a href="price-coaching.html">1:1 강의</a></li>
+              <li><a href="price-growth.html">육성</a></li>
+              <li><a href="price-consulting.html">기타서비스</a></li>
+            </ul>
+          </li>
+      
+          <li><a href="certification.html">작업인증</a></li>
+          <li><a href="progress.html">작업현황</a></li>
+          <li><a href="reviews.html">고객후기</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+        </ul>
+      </nav>
+    <a href="#" class="contact-btn">
+      <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+    </a>
+  </header>
+
+  <main>
+    <h1>작업현황</h1>
+    <p>작업현황 관련 내용이 들어갈 영역입니다.</p>
+  </main>
+
+  <script defer src="script.js"></script>
+
+  <footer class="happyteam-footer">
+    <div class="footer-content">
+        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+        <div class="footer-links">
+            <a href="#">서비스 이용약관</a> | 
+            <a href="#">개인정보 처리방침</a> | 
+            <a href="#">문의하기</a>
+        </div>
+        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      const dropdown = dropdownToggle.closest('.dropdown');
+  
+      dropdownToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      });
+  
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

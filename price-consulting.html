@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>미코팀 | 공지사항</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">미코팀</a>
+    <nav>
+        <ul class="nav-links">
+          <li><a href="lineup.html">기사 라인업</a></li>
+      
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">가격표</a>
+            <ul class="dropdown-menu">
+              <li><a href="price-delegation.html">대리 가격</a></li>
+              <li><a href="price-duo.html">듀오 가격</a></li>
+              <li><a href="price-placement.html">배치 고사</a></li>
+              <li><a href="price-coaching.html">1:1 강의</a></li>
+              <li><a href="price-growth.html">육성</a></li>
+              <li><a href="price-consulting.html">기타서비스</a></li>
+            </ul>
+          </li>
+      
+          <li><a href="certification.html">작업인증</a></li>
+          <li><a href="progress.html">작업현황</a></li>
+          <li><a href="reviews.html">고객후기</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+        </ul>
+      </nav>
+    <a href="#" class="contact-btn">
+      <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+    </a>
+  </header>
+
+  <section class="mico-other-services">
+    <h2>기타서비스 진행 안내</h2>
+    <div class="mico-service-grid">
+      <div class="mico-service-card">
+        <img src="img/일반.webp" alt="일반게임 1판">
+        <h3>일반게임 1판</h3>
+        <p>1판 5,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/일반.webp" alt="일반게임 1승">
+        <h3>일반게임 1승</h3>
+        <p>1승 7,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/칼바람.webp" alt="칼바람 듀오">
+        <h3>칼바람 듀오</h3>
+        <p>1판 5,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/아레나.webp" alt="아레나 듀오">
+        <h3>아레나 듀오</h3>
+        <p>1판 7,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/내전.webp" alt="내전 운영">
+        <h3>내전 운영</h3>
+        <p>1회 15,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/숙련도.webp" alt="숙련도 토큰 6렙">
+        <h3>숙련도 토큰 6렙</h3>
+        <p>1개 8,000원</p>
+      </div>
+      <div class="mico-service-card">
+        <img src="img/숙련도.webp" alt="숙련도 토큰 7렙">
+        <h3>숙련도 토큰 7렙</h3>
+        <p>1개 10,000원</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <script defer src="script.js"></script>
+
+  <footer class="happyteam-footer">
+    <div class="footer-content">
+        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+        <div class="footer-links">
+            <a href="#">서비스 이용약관</a> | 
+            <a href="#">개인정보 처리방침</a> | 
+            <a href="#">문의하기</a>
+        </div>
+        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      const dropdown = dropdownToggle.closest('.dropdown');
+  
+      dropdownToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      });
+  
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+
+
+
+<style>
+    .mico-other-services {
+  background-color: #111;
+  padding: 8.5rem 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.mico-other-services h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  color: #f9f9f9;
+}
+
+.mico-service-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.mico-service-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2e2e2e;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 180px;
+  
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.mico-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.mico-service-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.mico-service-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: #ffd400;
+}
+
+.mico-service-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+</style>
+
+</body>
+</html>

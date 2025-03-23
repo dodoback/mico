@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>미코팀 | 공지사항</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">미코팀</a>
+    <nav>
+        <ul class="nav-links">
+          <li><a href="lineup.html">기사 라인업</a></li>
+      
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">가격표</a>
+            <ul class="dropdown-menu">
+              <li><a href="price-delegation.html">대리 가격</a></li>
+              <li><a href="price-duo.html">듀오 가격</a></li>
+              <li><a href="price-placement.html">배치 고사</a></li>
+              <li><a href="price-coaching.html">1:1 강의</a></li>
+              <li><a href="price-growth.html">육성</a></li>
+              <li><a href="price-consulting.html">기타서비스</a></li>
+            </ul>
+          </li>
+      
+          <li><a href="certification.html">작업인증</a></li>
+          <li><a href="progress.html">작업현황</a></li>
+          <li><a href="reviews.html">고객후기</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+        </ul>
+      </nav>
+    <a href="#" class="contact-btn">
+      <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+    </a>
+  </header>
+
+  <section class="section">
+    <h2>미코팀 육성 서비스</h2>
+    <p><span class="highlight">미코팀 전속 기사님들</span>이 직접 진행하는 안전하고 빠른 육성 서비스입니다.</p>
+  </section>
+
+  <section class="section">
+    <h2>육성 진행 가이드</h2>
+    <div class="guide-steps">
+      <div class="guide-step"><span>1단계</span> 상담 및 접수</div>
+      <div class="guide-step"><span>2단계</span> 기사 배정</div>
+      <div class="guide-step"><span>3단계</span> RP 충전 & 육성 시작</div>
+      <div class="guide-step"><span>4단계</span> 완료 후 보고</div>
+    </div>
+  </section>
+
+  <section class="mico-price-section">
+    <h2 class="mico-price-title">육성 가격표</h2>
+  
+    <div class="mico-price-table">
+      <div class="mico-price-card">
+        <div class="mico-price-image"><img src="img/언랭크-이미지.png" alt="수동육성"></div>
+        <div class="mico-price-info">
+          <h3>수동육성 (72시간)</h3>
+          <ul>
+            <li>1~30 육성비용: <span>100,000원</span></li>
+            <li>RP 충전: <span>75,000원</span></li>
+            <li class="total">패키지 가격: <span>168,000원</span></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="mico-price-card">
+        <div class="mico-price-image"><img src="img/언랭크-이미지.png" alt="빠른 수동육성"></div>
+        <div class="mico-price-info">
+          <h3>빠른 수동육성 (48시간)</h3>
+          <ul>
+            <li>1~30 육성비용: <span>130,000원</span></li>
+            <li>RP 충전: <span>75,000원</span></li>
+            <li class="total">패키지 가격: <span>198,000원</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="section faq">
+    <h2>자주 묻는 질문</h2>
+    <div class="faq-item">
+      <h4>Q. 육성은 어떤 서비스인가요?</h4>
+      <p>30레벨까지 빠르게 계정을 성장시키는 수동 서비스입니다.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Q. 정지 위험성은 없나요?</h4>
+      <p>100% 수동으로 진행되며, AI 또는 자동화 툴을 사용하지 않습니다.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Q. 매크로가 아닌 걸 어떻게 알 수 있나요?</h4>
+      <p>기록으로 제공되는 육성 내역을 통해 기사님의 실제 플레이를 확인하실 수 있습니다.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Q. 작업 시간은 얼마나 걸리나요?</h4>
+      <p>기본적으로 72시간, 빠른 옵션은 48시간 내 완료됩니다.</p>
+    </div>
+  </section>
+
+  <script defer src="script.js"></script>
+
+  <footer class="happyteam-footer">
+    <div class="footer-content">
+        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+        <div class="footer-links">
+            <a href="#">서비스 이용약관</a> | 
+            <a href="#">개인정보 처리방침</a> | 
+            <a href="#">문의하기</a>
+        </div>
+        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      const dropdown = dropdownToggle.closest('.dropdown');
+  
+      dropdownToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      });
+  
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+
+<style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+
+
+
+    
+  </style>
+
+</body>
+</html>

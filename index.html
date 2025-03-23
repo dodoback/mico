@@ -9,26 +9,35 @@
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        미코팀
-        <span></span>
-    </div>
-
+<header class="site-header">
+    <a href="index.html" class="logo">미코팀<span></span></a>
     <nav>
-        <ul>
-            <li><a href="#">기사 라인업</a></li>
-            <li><a href="#">가격표</a></li>
-            <li><a href="#">작업인증</a></li>
-            <li><a href="#">작업현황</a></li>
-            <li><a href="#">고객후기</a></li>
-            <li><a href="#">공지사항</a></li>
+        <ul class="nav-links">
+          <li><a href="lineup.html">기사 라인업</a></li>
+      
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">가격표</a>
+            <ul class="dropdown-menu">
+              <li><a href="price-delegation.html">대리 가격</a></li>
+              <li><a href="price-duo.html">듀오 가격</a></li>
+              <li><a href="price-placement.html">배치 고사</a></li>
+              <li><a href="price-coaching.html">1:1 강의</a></li>
+              <li><a href="price-growth.html">육성</a></li>
+              <li><a href="price-consulting.html">기타서비스</a></li>
+            </ul>
+          </li>
+      
+          <li><a href="certification.html">작업인증</a></li>
+          <li><a href="progress.html">작업현황</a></li>
+          <li><a href="reviews.html">고객후기</a></li>
+          <li><a href="notice.html">공지사항</a></li>
         </ul>
-    </nav>
+      </nav>
+      
 
-    <a href="#" class="contact-btn">
-       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
-    </a>
+  <a href="#" class="contact-btn">
+    <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+  </a>
 </header>
 
 <!-- Swiper 슬라이드 -->
@@ -274,6 +283,26 @@
 </footer>
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdown = dropdownToggle.closest('.dropdown');
+
+    dropdownToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      dropdown.classList.toggle('open');
+    });
+
+    // 외부 클릭 시 닫힘 처리
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+  });
+
+  
+</script>
 
 
 </body>
