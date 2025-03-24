@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>미코팀 | 작업인증</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미코팀 | 작업인증</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
 </head>
+
 <body>
-  <header>
-    <a href="index.html" class="logo">미코팀</a>
-    <nav>
+
+    <body class="progress-page"></body>
+
+
+    <header class="site-header">
+        <a href="index.html" class="logo">미코팀<span></span></a>
+        <!-- 햄버거 버튼 -->
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    
+      <!-- 네비게이션 -->
+      <nav>
         <ul class="nav-links">
           <li><a href="lineup.html">기사 라인업</a></li>
-      
           <li class="dropdown">
             <a href="#" class="dropdown-toggle">가격표</a>
             <ul class="dropdown-menu">
@@ -25,39 +39,354 @@
               <li><a href="price-consulting.html">기타서비스</a></li>
             </ul>
           </li>
-      
           <li><a href="certification.html">작업인증</a></li>
           <li><a href="progress.html">작업현황</a></li>
           <li><a href="reviews.html">고객후기</a></li>
           <li><a href="notice.html">공지사항</a></li>
         </ul>
       </nav>
-    <a href="#" class="contact-btn">
-      <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
-    </a>
-  </header>
+          
+    
+      <a href="#" class="contact-btn">
+        <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+      </a>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const toggle = document.querySelector('.dropdown-toggle');
+          const menu = document.querySelector('.dropdown-menu');
+      
+          toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            menu.classList.toggle('open');
+          });
+        });
+      </script>
 
-  <main>
-    <h1>작업인증</h1>
-    <p>작업 인증 관련 내용이 들어갈 영역입니다.</p>
-  </main>
+    <div class="progress-container">
+        <div class="progress-gallery">
+            <div class="progress-card" data-tier="challenger" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">시즌15 챌린저 미드</p>
+                <p class="progress-date">2025년 1월 20일</p>
+            </div>
+
+            <div class="progress-card" data-tier="master" data-service="duo">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">마스터</span>
+                    <span class="tag yellow">듀오랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
 
 
-  <script defer src="script.js"></script>
+            <div class="progress-card" data-tier="diamond" data-service="lesson">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">다이아</span>
+                    <span class="tag yellow">강의</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
 
-  <footer class="happyteam-footer">
-    <div class="footer-content">
-        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
-        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
-        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
-        <div class="footer-links">
-            <a href="#">서비스 이용약관</a> | 
-            <a href="#">개인정보 처리방침</a> | 
-            <a href="#">문의하기</a>
+
+            <div class="progress-card" data-tier="challenger" data-service="duo">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">듀오랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+
+            <div class="progress-card" data-tier="master" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">마스터</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+
+            <div class="progress-card" data-tier="diamond" data-service="duo">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">다이아</span>
+                    <span class="tag yellow">듀오랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+
+            <div class="progress-card" data-tier="challenger" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+            <div class="progress-card" data-tier="challenger" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+
+            <div class="progress-card" data-tier="challenger" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+            <div class="progress-card" data-tier="challenger" data-service="delegation">
+                <img src="img/text.png" alt="작업 이미지" />
+                <div class="progress-tags">
+                    <span class="tag yellow">챌린저</span>
+                    <span class="tag yellow">대리랭크</span>
+                </div>
+                <p class="progress-title">마스터 정글 듀오</p>
+                <p class="progress-date">2025년 1월 15일</p>
+            </div>
+
+            <!-- 카드 리스트 추가 -->
         </div>
-        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+
+
+
+        <aside class="progress-filter">
+            <h3>필터</h3>
+            <div class="filter-group">
+                <p>티어</p>
+                <label><input type="radio" name="tier" value="all" checked /> 전체</label>
+                <label><input type="radio" name="tier" value="challenger" /> 챌린저</label>
+                <label><input type="radio" name="tier" value="master" /> 마스터</label>
+                <label><input type="radio" name="tier" value="diamond" /> 다이아</label>
+            </div>
+            <div class="filter-group">
+                <p>서비스</p>
+                <label><input type="radio" name="service" value="all" checked /> 전체</label>
+                <label><input type="radio" name="service" value="delegation" /> 대리랭크</label>
+                <label><input type="radio" name="service" value="duo" /> 듀오랭크</label>
+                <label><input type="radio" name="service" value="lesson" /> 강의</label>
+            </div>
+            <!-- 페이지 네비게이션 추가 -->
+            <div class="pagination">
+                <button onclick="changePage(-1)">이전</button>
+                <span id="pageInfo">1 / 1</span>
+                <button onclick="changePage(1)">다음</button>
+            </div>
+        </aside>
     </div>
-</footer>
+
+
+
+
+
+    <script src="certification.js"></script>
+
+
+    <style>
+        body.progress-page {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .progress-container {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .progress-gallery {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .progress-card {
+            background-color: #1c1c1c;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .progress-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .progress-tags {
+            margin: 12px 0 6px;
+        }
+
+        .tag {
+            background-color: #ffe600;
+            color: #111;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+        }
+
+        .progress-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+
+        .progress-date {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .progress-filter {
+            width: 220px;
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        .progress-filter h3 {
+            color: #ffe600;
+            margin-bottom: 16px;
+        }
+
+        .filter-group p {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #ffe600;
+            border: none;
+            padding: 6px 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .pagination span {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .pagination button:disabled {
+            background-color: #555;
+            color: #999;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tierFilters = document.querySelectorAll('input[name="tier"]');
+            const serviceFilters = document.querySelectorAll('input[name="service"]');
+            const allCards = Array.from(document.querySelectorAll('.progress-card'));
+            const cardsPerPage = 9;
+            let currentPage = 1;
+            let filteredCards = [...allCards];
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageInfo = document.getElementById('pageInfo');
+
+            function renderCards() {
+                const start = (currentPage - 1) * cardsPerPage;
+                const end = start + cardsPerPage;
+
+                filteredCards.forEach((card, index) => {
+                    card.style.display = index >= start && index < end ? 'block' : 'none';
+                });
+
+                const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+                pageInfo.textContent = `${currentPage} / ${totalPages}`;
+
+                // ✅ 버튼 상태 업데이트
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+            }
+
+            function filterCards() {
+                const selectedTier = document.querySelector('input[name="tier"]:checked')?.value;
+                const selectedService = document.querySelector('input[name="service"]:checked')?.value;
+
+                filteredCards = allCards.filter(card => {
+                    const cardTier = card.dataset.tier;
+                    const cardService = card.dataset.service;
+
+                    const tierMatch = selectedTier === 'all' || selectedTier === cardTier;
+                    const serviceMatch = selectedService === 'all' || selectedService === cardService;
+
+                    return tierMatch && serviceMatch;
+                });
+
+                currentPage = 1;
+                renderCards();
+            }
+
+            window.changePage = (direction) => {
+                const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+                currentPage += direction;
+
+                if (currentPage < 1) currentPage = 1;
+                if (currentPage > totalPages) currentPage = totalPages;
+
+                renderCards();
+            };
+
+            tierFilters.forEach(input => input.addEventListener('change', filterCards));
+            serviceFilters.forEach(input => input.addEventListener('change', filterCards));
+
+            // 초기 렌더링
+            renderCards();
+        });
+    </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -78,4 +407,5 @@
   </script>
 
 </body>
+
 </html>

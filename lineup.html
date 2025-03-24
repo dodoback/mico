@@ -7,17 +7,26 @@
   <title>미코팀 | 기사 라인업</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
   <header class="site-header">
     <a href="index.html" class="logo">미코팀<span></span></a>
+  
+    <!-- 햄버거 버튼 -->
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  
+    <!-- 네비게이션 -->
     <nav>
       <ul class="nav-links">
         <li><a href="lineup.html">기사 라인업</a></li>
-    
+  
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">가격표</a>
+          <a href="#" class="dropdown-toggle" id="price-toggle">가격표</a>
           <ul class="dropdown-menu">
             <li><a href="price-delegation.html">대리 가격</a></li>
             <li><a href="price-duo.html">듀오 가격</a></li>
@@ -27,21 +36,50 @@
             <li><a href="price-consulting.html">기타서비스</a></li>
           </ul>
         </li>
-    
+  
         <li><a href="certification.html">작업인증</a></li>
         <li><a href="progress.html">작업현황</a></li>
         <li><a href="reviews.html">고객후기</a></li>
         <li><a href="notice.html">공지사항</a></li>
       </ul>
     </nav>
-
+  
     <a href="#" class="contact-btn">
       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
     </a>
   </header>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const priceToggle = document.getElementById("price-toggle");
+      const dropdown = priceToggle.closest(".dropdown");
+      const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+    
+      // 드롭다운 메뉴 클릭 시 toggle
+      priceToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation(); // 드롭다운 내부 클릭 전파 방지
+        dropdown.classList.toggle("active");
+      });
+    
+      // 드롭다운 메뉴 내부 클릭 시 전파 방지
+      dropdownMenu.addEventListener("click", function (e) {
+        e.stopPropagation(); // 메뉴 내부 클릭 시 닫힘 방지
+      });
+    
+      // 드롭다운 바깥 클릭 시 닫힘
+      document.addEventListener("click", function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+    });
+    </script>
+    
 
-  <section class="lineup-banner">
-    <img src="img/resized_image.png" alt="">
+
+
+  <section class="main-banner">
+    <img src="img/resized_image.png" alt="메인 배너 이미지" />
   </section>
 
 

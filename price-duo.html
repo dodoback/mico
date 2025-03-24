@@ -8,38 +8,58 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <a href="index.html" class="logo">미코팀</a>
-    <nav>
-        <ul class="nav-links">
-          <li><a href="lineup.html">기사 라인업</a></li>
-      
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle">가격표</a>
-            <ul class="dropdown-menu">
-              <li><a href="price-delegation.html">대리 가격</a></li>
-              <li><a href="price-duo.html">듀오 가격</a></li>
-              <li><a href="price-placement.html">배치 고사</a></li>
-              <li><a href="price-coaching.html">1:1 강의</a></li>
-              <li><a href="price-growth.html">육성</a></li>
-              <li><a href="price-consulting.html">기타서비스</a></li>
-            </ul>
-          </li>
-      
-          <li><a href="certification.html">작업인증</a></li>
-          <li><a href="progress.html">작업현황</a></li>
-          <li><a href="reviews.html">고객후기</a></li>
-          <li><a href="notice.html">공지사항</a></li>
-        </ul>
-      </nav>
-    <a href="#" class="contact-btn">
-      <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
-    </a>
-  </header>
+  <header class="site-header">
+    <a href="index.html" class="logo">미코팀<span></span></a>
+    <!-- 햄버거 버튼 -->
+  <input type="checkbox" id="menu-toggle" />
+  <label for="menu-toggle" class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
 
-  <main>
-    <img src="img/resized_image_2.png" alt="#">
-  </main>
+  <!-- 네비게이션 -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="lineup.html">기사 라인업</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">가격표</a>
+        <ul class="dropdown-menu">
+          <li><a href="price-delegation.html">대리 가격</a></li>
+          <li><a href="price-duo.html">듀오 가격</a></li>
+          <li><a href="price-placement.html">배치 고사</a></li>
+          <li><a href="price-coaching.html">1:1 강의</a></li>
+          <li><a href="price-growth.html">육성</a></li>
+          <li><a href="price-consulting.html">기타서비스</a></li>
+        </ul>
+      </li>
+      <li><a href="certification.html">작업인증</a></li>
+      <li><a href="progress.html">작업현황</a></li>
+      <li><a href="reviews.html">고객후기</a></li>
+      <li><a href="notice.html">공지사항</a></li>
+    </ul>
+  </nav>
+      
+
+  <a href="#" class="contact-btn">
+    <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
+  </a>
+</header>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('.dropdown-toggle');
+      const menu = document.querySelector('.dropdown-menu');
+  
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.toggle('open');
+      });
+    });
+  </script>
+
+  <section class="main-banner">
+    <img src="img/resized_image.png" alt="메인 배너 이미지" />
+  </section>
   <!-- 듀오 가격 섹션 -->
   <section class="price-section">
     <h2>🙇‍♂️ 💼 듀오 가격</h2>
