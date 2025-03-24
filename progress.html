@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>미코팀 | 작업현황</title>
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  
 </head>
 <body>
   <header class="site-header">
@@ -398,99 +398,141 @@ top: 50%;
     ];
   
     let isAdmin = false;
-    let currentPage = 1;
-    const itemsPerPage = 10;
-  
-    function login() {
-      const pw = document.getElementById('adminPassword').value;
-      if (pw === '1234') {
-        isAdmin = true;
-        alert("관리자 로그인 성공!");
-        renderTable();
-      } else {
-        alert("비밀번호가 틀렸습니다.");
-      }
-    }
-  
-    function renderTable() {
-      const statusFilter = document.getElementById('statusFilter').value;
-      const serviceFilter = document.getElementById('serviceFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
-  
-      let filtered = data.filter(item => {
-        return (
-          (statusFilter === "전체" || item.status === statusFilter) &&
-          (serviceFilter === "전체" || item.service === serviceFilter) &&
-          item.title.toLowerCase().includes(search)
-        );
-      });
-  
-      const tbody = document.getElementById('progressBody');
-      tbody.innerHTML = '';
-  
-      const start = (currentPage - 1) * itemsPerPage;
-      const paginated = filtered.slice(start, start + itemsPerPage);
-  
-      paginated.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item.id}</td>
-          <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
-          <td>${item.service}</td>
-          <td><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
-          <td>${item.author}</td>
-          <td>${item.date}</td>
-          <td>${item.views}</td>
-          <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-  
-      renderPagination(filtered.length);
-    }
-  
-    function renderPagination(totalItems) {
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
-      const pagination = document.getElementById('pagination');
-      pagination.innerHTML = '';
-  
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        if (i === currentPage) btn.classList.add('active');
-        btn.onclick = () => {
-          currentPage = i;
-          renderTable();
-        };
-        pagination.appendChild(btn);
-      }
-    }
-  
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('title-clickable')) {
-        e.preventDefault();
-        const imgSrc = e.target.getAttribute('data-image');
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = imgSrc;
-        modal.style.display = "block";
-      }
-    });
-  
-    document.getElementById('closeModal').addEventListener('click', function () {
-      document.getElementById('imageModal').style.display = "none";
-    });
-  
-    window.addEventListener('click', function (e) {
-      const modal = document.getElementById('imageModal');
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-  
-    window.onload = () => {
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  function login() {
+    const pw = document.getElementById('adminPassword').value;
+    if (pw === '1234') {
+      isAdmin = true;
+      alert("관리자 로그인 성공!");
       renderTable();
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+    }
+  }
+
+  function renderTable() {
+    const statusFilter = document.getElementById('statusFilter').value;
+    const serviceFilter = document.getElementById('serviceFilter').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    let filtered = data.filter(item => {
+      return (
+        (statusFilter === "전체" || item.status === statusFilter) &&
+        (serviceFilter === "전체" || item.service === serviceFilter) &&
+        item.title.toLowerCase().includes(search)
+      );
+    });
+
+    const tbody = document.getElementById('progressBody');
+    tbody.innerHTML = '';
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(start, start + itemsPerPage);
+
+    paginated.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${item.id}</td>
+        <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
+        <td>${item.service}</td>
+        <td><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
+        <td>${item.author}</td>
+        <td>${item.date}</td>
+        <td>${item.views}</td>
+        <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    renderPagination(filtered.length);
+  }
+
+  function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '‹ 이전';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
     };
+    pagination.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.onclick = () => {
+        currentPage = i;
+        renderTable();
+      };
+      pagination.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = '다음 ›';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    };
+    pagination.appendChild(nextBtn);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('title-clickable')) {
+      e.preventDefault();
+      const imgSrc = e.target.getAttribute('data-image');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imgSrc;
+      modal.style.display = "block";
+    }
+  });
+
+  document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('imageModal').style.display = "none";
+  });
+
+  window.addEventListener('click', function (e) {
+    const modal = document.getElementById('imageModal');
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // ✅ 관리자 버튼 이벤트 연결
+  document.getElementById('progressBody').addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-edit')) {
+      alert('수정 기능은 아직 구현되지 않았습니다.');
+    }
+
+    if (e.target.classList.contains('btn-delete')) {
+      const row = e.target.closest('tr');
+      const id = parseInt(row.children[0].textContent);
+
+      if (confirm('삭제하시겠습니까?')) {
+        const index = data.findIndex(item => item.id === id);
+        if (index !== -1) {
+          data.splice(index, 1);
+          renderTable();
+        }
+      }
+    }
+  });
+
+  window.onload = () => {
+    renderTable();
+  };
 
     function openModal(src) {
   const modal = document.getElementById('imageModal');
@@ -519,5 +561,189 @@ function closeModal() {
   </div>
 </footer>
   
+<script type="module">
+
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    deleteDoc,
+    doc,
+    updateDoc
+  } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
+    authDomain: "mico-test-3b006.firebaseapp.com",
+    projectId: "mico-test-3b006",
+    storageBucket: "mico-test-3b006.appspot.com",
+    messagingSenderId: "282703834529",
+    appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const colRef = collection(db, "progress");
+
+  let isAdmin = false;
+  let progressData = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  async function fetchProgressData() {
+    const snapshot = await getDocs(colRef);
+    progressData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderTable();
+  }
+
+  document.getElementById('progressBody').addEventListener('click', async function(e) {
+    if (e.target.classList.contains('btn-delete')) {
+      const row = e.target.closest('tr');
+      const id = row.dataset.id;
+
+      if (confirm('삭제하시겠습니까?')) {
+        await deleteDoc(doc(db, "progress", id));
+        fetchProgressData();
+      }
+    }
+
+    if (e.target.classList.contains('btn-edit')) {
+      const row = e.target.closest('tr');
+      const id = row.dataset.id;
+      const titleCell = row.querySelector('.title');
+      const newTitle = prompt("새 제목을 입력하세요:", titleCell.textContent);
+      if (newTitle) {
+        await updateDoc(doc(db, "progress", id), { title: newTitle });
+        fetchProgressData();
+      }
+    }
+  });
+
+  document.getElementById('adminPassword').addEventListener('keypress', e => {
+    if (e.key === 'Enter') login();
+  });
+
+  window.login = function () {
+    const pw = document.getElementById('adminPassword').value;
+    if (pw === '1234') {
+      isAdmin = true;
+      alert("관리자 로그인 성공!");
+      renderTable();
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+    }
+  }
+
+  window.renderTable = function () {
+    const statusFilter = document.getElementById('statusFilter').value;
+    const serviceFilter = document.getElementById('serviceFilter').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    let filtered = progressData.filter(item => {
+      return (
+        (statusFilter === "전체" || item.status === statusFilter) &&
+        (serviceFilter === "전체" || item.service === serviceFilter) &&
+        item.title.toLowerCase().includes(search)
+      );
+    });
+
+    const tbody = document.getElementById('progressBody');
+    tbody.innerHTML = '';
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(start, start + itemsPerPage);
+
+    paginated.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.dataset.id = item.id;
+      tr.innerHTML = `
+        <td>${item.id}</td>
+        <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
+        <td>${item.service}</td>
+        <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
+        <td>${item.author}</td>
+        <td>${item.date}</td>
+        <td>${item.views}</td>
+        <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    renderPagination(filtered.length);
+  }
+
+  window.renderPagination = function (totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '‹ 이전';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    };
+    pagination.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.onclick = () => {
+        currentPage = i;
+        renderTable();
+      };
+      pagination.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = '다음 ›';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    };
+    pagination.appendChild(nextBtn);
+  }
+
+  // 모달 이벤트는 기존과 동일하게 유지
+  document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('title-clickable')) {
+      e.preventDefault();
+      const imgSrc = e.target.getAttribute('data-image');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imgSrc;
+      modal.style.display = "block";
+    }
+  });
+
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('imageModal').style.display = "none";
+  });
+
+  window.addEventListener('click', function (e) {
+    const modal = document.getElementById('imageModal');
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // 페이지 로딩 시 Firestore 데이터 불러오기
+  window.onload = () => {
+    fetchProgressData();
+  }
+</script>
+
+
+
 </body>
 </html>
