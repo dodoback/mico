@@ -899,6 +899,170 @@
   </script>
 
 
+<!-- Firebase 연동 + 후기 실시간 관리 기능이 포함된 reviews.html 예시 -->
+<!-- 1. 기존 구조 유지 / 2. Firestore에서 후기 불러오기 / 3. 후기 추가/삭제/수정 반영 -->
+
+<!-- 헤더 및 기존 레이아웃 유지 -->
+<!-- 아래는 Firebase 연동 스크립트 예시입니다. -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+// Firebase 설정
+const firebaseConfig = {
+  apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
+  authDomain: "mico-test-3b006.firebaseapp.com",
+  projectId: "mico-test-3b006",
+  storageBucket: "mico-test-3b006.appspot.com",
+  messagingSenderId: "282703834529",
+  appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const colRef = collection(db, "reviews");
+
+let isAdmin = false;
+let reviews = [];
+let currentPage = 1;
+const reviewsPerPage = 10;
+
+const reviewList = document.getElementById('reviewList');
+const pagination = document.getElementById('pagination');
+const searchInput = document.getElementById('searchInput');
+const modal = document.getElementById('detailModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalAuthor = document.getElementById('modalAuthor');
+const modalContent = document.getElementById('modalContent');
+const modalRating = document.getElementById('modalRating');
+const commentList = document.getElementById('commentList');
+const commentInput = document.getElementById('commentInput');
+
+async function fetchReviews() {
+  const snapshot = await getDocs(colRef);
+  reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
+  renderReviews();
+}
+
+function renderReviews() {
+  reviewList.innerHTML = '';
+  const keyword = searchInput.value.trim().toLowerCase();
+  const filtered = reviews.filter(r =>
+    r.title.toLowerCase().includes(keyword) ||
+    r.author.toLowerCase().includes(keyword) ||
+    r.content.toLowerCase().includes(keyword)
+  );
+  const start = (currentPage - 1) * reviewsPerPage;
+  const current = filtered.slice(start, start + reviewsPerPage);
+
+  current.forEach(r => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${r.id}</td>
+      <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
+      <td>${r.author}</td>
+      <td>${r.time}</td>
+      <td>${r.views}</td>
+      <td class="admin-col">
+        <button onclick="deleteReview('${r.fid}')">삭제</button>
+      </td>
+    `;
+    row.querySelector('.review-title').onclick = () => openDetail(r);
+    reviewList.appendChild(row);
+  });
+
+  renderPagination(filtered.length);
+  document.querySelector('.review-table').classList.toggle('admin-mode', isAdmin);
+}
+
+function renderPagination(total) {
+  const totalPages = Math.ceil(total / reviewsPerPage);
+  pagination.innerHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    if (i === currentPage) btn.classList.add('active');
+    btn.onclick = () => {
+      currentPage = i;
+      renderReviews();
+    };
+    pagination.appendChild(btn);
+  }
+}
+
+async function deleteReview(fid) {
+  if (confirm('삭제하시겠습니까?')) {
+    await deleteDoc(doc(db, "reviews", fid));
+    fetchReviews();
+  }
+}
+
+function openDetail(review) {
+  modalTitle.textContent = review.title;
+  modalAuthor.textContent = review.author;
+  modalContent.textContent = review.content;
+  modalRating.innerHTML = '★'.repeat(review.rating);
+  modal.style.display = 'flex';
+}
+
+document.getElementById('addReviewBtn').onclick = () => {
+  document.getElementById('writeModal').style.display = 'flex';
+};
+
+document.getElementById('submitReview').onclick = async () => {
+  const title = document.getElementById('newTitle').value;
+  const author = document.getElementById('newAuthor').value;
+  const content = document.getElementById('newContent').value;
+  const rating = document.querySelectorAll('#starInput span.selected').length;
+  const time = new Date().toLocaleDateString();
+  if (title && author && content) {
+    await addDoc(colRef, {
+      id: Date.now(),
+      title, author, content, time, views: 0, rating, comments: []
+    });
+    document.getElementById('writeModal').style.display = 'none';
+    fetchReviews();
+  }
+};
+
+document.getElementById('adminLoginBtn').onclick = () => {
+  document.getElementById('adminModal').style.display = 'flex';
+};
+
+document.getElementById('loginBtn').onclick = () => {
+  if (document.getElementById('adminPassword').value === '1234') {
+    isAdmin = true;
+    fetchReviews();
+    document.getElementById('adminModal').style.display = 'none';
+  } else {
+    alert('비밀번호가 틀렸습니다.');
+  }
+};
+
+document.querySelectorAll('.close-btn').forEach(btn => {
+  btn.onclick = () => btn.closest('.modal').style.display = 'none';
+});
+
+searchInput.addEventListener('input', () => {
+  currentPage = 1;
+  renderReviews();
+});
+
+window.onload = () => {
+  fetchReviews();
+};
+</script>
+
+
+
   <script defer src="script.js"></script>
   <footer class="happyteam-footer">
     <div class="footer-content">
