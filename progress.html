@@ -562,8 +562,6 @@ function closeModal() {
 </footer>
   
 <script type="module">
-
-  
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
   import {
     getFirestore,
@@ -587,6 +585,23 @@ function closeModal() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const colRef = collection(db, "progress");
+
+  // ✅ 테스트 데이터 자동 추가 (한 번만 실행 후 주석 처리하거나 제거해도 됨)
+  const sampleData = Array.from({ length: 10 }).map((_, i) => ({
+    id: 1000 + i,
+    status: i % 2 === 0 ? "진행중" : "작업완료",
+    service: ["강의", "듀오", "대리"][i % 3],
+    title: `테스트 작업 ${i + 1}번`,
+    author: "미코팀",
+    date: "2025-03-25",
+    views: Math.floor(Math.random() * 50),
+    image: "img/일반.webp"
+  }));
+
+  sampleData.forEach(async (item) => {
+    await addDoc(colRef, item);
+    console.log(`추가 완료: ${item.title}`);
+  });
 
   let isAdmin = false;
   let progressData = [];
@@ -714,7 +729,6 @@ function closeModal() {
     pagination.appendChild(nextBtn);
   }
 
-  // 모달 이벤트는 기존과 동일하게 유지
   document.addEventListener('click', function (e) {
     if (e.target.classList.contains('title-clickable')) {
       e.preventDefault();
@@ -737,7 +751,6 @@ function closeModal() {
     }
   });
 
-  // 페이지 로딩 시 Firestore 데이터 불러오기
   window.onload = () => {
     fetchProgressData();
   }
