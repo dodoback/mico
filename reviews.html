@@ -1,91 +1,895 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>미코팀 | 고객후기</title>
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
 </head>
+
 <body>
   <header class="site-header">
     <a href="index.html" class="logo">미코팀</a>
-     <!-- 햄버거 버튼 -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
+    <!-- 햄버거 버튼 -->
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
 
-  <!-- 네비게이션 -->
-  <nav>
-    <ul class="nav-links">
-      <li><a href="lineup.html">기사 라인업</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle">가격표</a>
-        <ul class="dropdown-menu">
-          <li><a href="price-delegation.html">대리 가격</a></li>
-          <li><a href="price-duo.html">듀오 가격</a></li>
-          <li><a href="price-placement.html">배치 고사</a></li>
-          <li><a href="price-coaching.html">1:1 강의</a></li>
-          <li><a href="price-growth.html">육성</a></li>
-          <li><a href="price-consulting.html">기타서비스</a></li>
-        </ul>
-      </li>
-      <li><a href="certification.html">작업인증</a></li>
-      <li><a href="progress.html">작업현황</a></li>
-      <li><a href="reviews.html">고객후기</a></li>
-      <li><a href="notice.html">공지사항</a></li>
-    </ul>
-  </nav>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.querySelector('.dropdown-toggle');
-      const menu = document.querySelector('.dropdown-menu');
-  
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.toggle('open');
+    <!-- 네비게이션 -->
+    <nav>
+      <ul class="nav-links">
+        <li><a href="lineup.html">기사 라인업</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">가격표</a>
+          <ul class="dropdown-menu">
+            <li><a href="price-delegation.html">대리 가격</a></li>
+            <li><a href="price-duo.html">듀오 가격</a></li>
+            <li><a href="price-placement.html">배치 고사</a></li>
+            <li><a href="price-coaching.html">1:1 강의</a></li>
+            <li><a href="price-growth.html">육성</a></li>
+            <li><a href="price-consulting.html">기타서비스</a></li>
+          </ul>
+        </li>
+        <li><a href="certification.html">작업인증</a></li>
+        <li><a href="progress.html">작업현황</a></li>
+        <li><a href="reviews.html">고객후기</a></li>
+        <li><a href="notice.html">공지사항</a></li>
+      </ul>
+    </nav>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.dropdown-toggle');
+        const menu = document.querySelector('.dropdown-menu');
+
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          menu.classList.toggle('open');
+        });
       });
-    });
-  </script>
+    </script>
     <a href="#" class="contact-btn">
       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
     </a>
   </header>
+  ddddddddddd
 
-  <main>
-    <h1>고객후기</h1>
-    <p>고객후기 관련 내용이 들어갈 영역입니다.</p>
+  <main class="review-section">
+    <!-- 포토 후기 -->
+    <section class="photo-review">
+      <h2>📸 포토 후기</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn prev">‹</button>
+        <div class="slider">
+          <div class="slides">
+            <img src="img/숙련도.webp" alt="후기1" />
+            <img src="img/숙련도.webp" alt="후기2" />
+            <img src="img/숙련도.webp" alt="후기3" />
+            <img src="img/숙련도.webp" alt="후기4" />
+            <img src="img/숙련도.webp" alt="후기5" />
+            <img src="img/숙련도.webp" alt="후기6" />
+            <img src="img/숙련도.webp" alt="후기7" />
+            <img src="img/숙련도.webp" alt="후기8" />
+            <img src="img/숙련도.webp" alt="후기9" />
+            <img src="img/숙련도.webp" alt="후기10" />
+          </div>
+        </div>
+        <button class="slide-btn next">›</button>
+      </div>
+
+    </section>
+
+    <!-- 글 후기 리스트 -->
+    <section class="text-review">
+      <div class="review-header-bar">
+        <h2>📝 글 후기</h2>
+        <div>
+          <input type="text" id="searchInput" placeholder="Search" class="review-search" />
+          <button id="addReviewBtn">후기 작성</button>
+          <button id="adminLoginBtn">관리자 로그인</button>
+        </div>
+      </div>
+      <div class="review-box">
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>제목</th>
+              <th>글쓴이</th>
+              <th>작성시간</th>
+              <th>조회수</th>
+              <th class="admin-col">관리</th>
+            </tr>
+          </thead>
+          <tbody id="reviewList"></tbody>
+
+         
+        </table>
+         <!-- ✅ 페이지네이션을 테이블 밖으로 이동 -->
+  <div class="pagination" id="pagination"></div>
+      </div>
+    </section>
+
+    <!-- 상세보기 모달 -->
+    <div class="modal" id="detailModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <p><strong>작성자:</strong> <span id="modalAuthor"></span></p>
+        <p><strong>내용:</strong></p>
+        <p id="modalContent"></p>
+        <div class="rating">
+          <strong>평점:</strong>
+          <div id="modalRating" class="stars"></div>
+        </div>
+
+        <div class="comment-section">
+          <h4>💬 댓글</h4>
+          <ul id="commentList"></ul>
+          <input type="text" id="commentInput" placeholder="댓글 입력..." />
+          <button id="addCommentBtn">등록</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 후기 작성 모달 -->
+    <div class="modal" id="writeModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>후기 작성</h3>
+        <input type="text" id="newTitle" placeholder="제목" />
+        <input type="text" id="newAuthor" placeholder="작성자" />
+        <textarea id="newContent" placeholder="후기 내용"></textarea>
+        <div class="rating-input">
+          <strong>평점:</strong>
+          <div id="starInput" class="stars-input">
+            ★★★★★
+          </div>
+        </div>
+        <button id="submitReview">등록</button>
+      </div>
+    </div>
+
+    <!-- 관리자 로그인 모달 -->
+    <div class="modal" id="adminModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>관리자 로그인</h3>
+        <input type="password" id="adminPassword" placeholder="비밀번호 입력" />
+        <button id="loginBtn">로그인</button>
+      </div>
+    </div>
   </main>
 
-  <script defer src="script.js"></script>
 
-  <footer class="happyteam-footer">
-    <div class="footer-content">
-        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
-        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
-        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
-        <div class="footer-links">
-            <a href="#">서비스 이용약관</a> | 
-            <a href="#">개인정보 처리방침</a> | 
-            <a href="#">문의하기</a>
-        </div>
-        <p class="copyright">© 2024 MICO. All rights reserved.</p>
-    </div>
-</footer>
+
+  <style>
+    /* ===== 전체 후기 영역 ===== */
+    .review-section {
+      padding: 60px 40px;
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    /* ===== 포토 후기 ===== */
+    .photo-review h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slider {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slides img {
+      width: calc(100% / 5);
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    /* 슬라이드 버튼 */
+    .slide-btn {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .slide-btn:hover {
+      background-color: #444;
+    }
+
+    /* ===== 글 후기 ===== */
+    .text-review {
+      margin-top: 80px;
+    }
+
+    .text-review h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .review-box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .review-title {
+      font-size: 1rem;
+    }
+
+    .review-search {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .review-table th,
+    .review-table td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+
+    .review-table th {
+      background: #2b2b2b;
+      color: #ddd;
+      font-weight: 600;
+    }
+
+    /* ===== 반응형 ===== */
+    @media (max-width: 1024px) {
+      .slides img {
+        width: calc(100% / 3);
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slides img {
+        width: calc(100% / 2);
+        height: 140px;
+      }
+
+      .slide-btn {
+        font-size: 20px;
+        padding: 8px 12px;
+      }
+
+      .review-section {
+        padding: 40px 20px;
+      }
+    }
+
+    .review-section {
+      padding: 60px 40px;
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    /* 포토 후기 슬라이더 */
+    .photo-review h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .slider {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slides img {
+      width: calc(100% / 5);
+      height: 180px;
+      object-fit: cover;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+
+    .slide-btn {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .slide-btn:hover {
+      background: #444;
+    }
+
+    /* 글 후기 */
+    .review-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 80px;
+      margin-bottom: 10px;
+    }
+
+    .review-box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .review-search {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #2a2a2a;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+
+    .review-table th {
+      background: #2b2b2b;
+      font-weight: bold;
+    }
+
+    .admin-col {
+      display: none;
+    }
+
+    .admin-mode .admin-col {
+      display: table-cell;
+    }
+
+    /* 모달 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      color: white;
+    }
+
+    .modal-content input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #2a2a2a;
+      color: white;
+    }
+
+    .modal-content button {
+      background: #6a5acd;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* 별점 */
+    .stars,
+    .stars-input {
+      font-size: 20px;
+      color: #888;
+      user-select: none;
+    }
+
+    .stars .filled,
+    .stars-input span.selected {
+      color: gold;
+      cursor: pointer;
+    }
+
+    .rating-input {
+      margin-top: 10px;
+    }
+
+    .comment-section {
+      margin-top: 20px;
+    }
+
+    .comment-section ul {
+      list-style: none;
+      padding-left: 0;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .comment-section li {
+      background: #2a2a2a;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .comment-section input {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: white;
+      border-radius: 6px;
+    }
+
+    .comment-section button {
+      margin-top: 8px;
+      padding: 6px 12px;
+      background: #6a5acd;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .pagination button {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 6px 12px;
+      margin: 0 4px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background: #6a5acd;
+      font-weight: bold;
+    }
+
+    .pagination button:hover {
+      background: #4b4b9b;
+    }
+
+    .pagination {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pagination button {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.pagination button.active {
+  background: #6a5acd;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.pagination button.active {
+  background: #6a5acd;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 별점 영역 스타일 */
+.stars-input span {
+  font-size: 24px;
+  color: #666; /* 기본 회색 */
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-right: 4px;
+}
+
+.stars-input span.selected {
+  color: gold !important; /* 노란색으로 확실하게 지정 */
+}
+
+#modalRating .star {
+  font-size: 22px;
+  color: #555;
+}
+
+#modalRating .star.filled {
+  color: gold;
+}
+
+  </style>
+
 
 <script>
+  const reviews = [
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 385, title: '재밌다 강의 무조건 여기 🔥', author: '내칭찬jjo', content: '너무 잘 가르쳐줘요!', time: '19시간전', views: 19, rating: 5, comments: [] },
+    { id: 384, title: '배치 든든 후기 💯', author: '강찌찌', content: '든든하게 잘됨', time: '2일전', views: 31, rating: 4, comments: [] },
+    { id: 383, title: '승수세 강의', author: '강력해G2', content: '감사합니다!', time: '2025-03-20', views: 36, rating: 3, comments: [] }
+  ];
+
+  let selectedReviewIndex = null;
+  let isAdmin = false;
+  let currentPage = 1;
+  const reviewsPerPage = 10;
+
+  const reviewList = document.getElementById('reviewList');
+  const detailModal = document.getElementById('detailModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalAuthor = document.getElementById('modalAuthor');
+  const modalContent = document.getElementById('modalContent');
+  const modalRating = document.getElementById('modalRating');
+  const commentList = document.getElementById('commentList');
+  const commentInput = document.getElementById('commentInput');
+  const pagination = document.getElementById('pagination');
+
+  // ⭐ 검색 필터 기반으로 페이지네이션 계산
+  const renderPagination = (filteredLength = reviews.length) => {
+    const totalPages = Math.ceil(filteredLength / reviewsPerPage);
+    pagination.innerHTML = '';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '‹ 이전';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderReviews();
+      }
+    };
+    pagination.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.onclick = () => {
+        currentPage = i;
+        renderReviews();
+      };
+      pagination.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = '다음 ›';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderReviews();
+      }
+    };
+    pagination.appendChild(nextBtn);
+  };
+
+  const renderReviews = () => {
+    reviewList.innerHTML = '';
+
+    const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+    const filtered = reviews.filter(r =>
+      r.title.toLowerCase().includes(keyword) ||
+      r.author.toLowerCase().includes(keyword) ||
+      r.content.toLowerCase().includes(keyword)
+    );
+
+    const totalPages = Math.ceil(filtered.length / reviewsPerPage);
+    const start = (currentPage - 1) * reviewsPerPage;
+    const end = start + reviewsPerPage;
+    const currentReviews = filtered.slice(start, end);
+
+    currentReviews.forEach((r) => {
+      const globalIndex = reviews.indexOf(r); // 원본 인덱스
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${r.id}</td>
+        <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
+        <td>${r.author}</td>
+        <td>${r.time}</td>
+        <td>${r.views}</td>
+        <td class="admin-col"><button onclick="deleteReview(${globalIndex})">삭제</button></td>
+      `;
+      row.querySelector('.review-title').onclick = () => openDetail(globalIndex);
+      reviewList.appendChild(row);
+    });
+
+    document.querySelector('.review-table').classList.toggle('admin-mode', isAdmin);
+    renderPagination(filtered.length);
+  };
+
+  const openDetail = (index) => {
+    const r = reviews[index];
+    selectedReviewIndex = index;
+    r.views++;
+
+    modalTitle.textContent = r.title;
+    modalAuthor.textContent = r.author;
+    modalContent.textContent = r.content;
+
+    modalRating.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('span');
+      star.textContent = '★';
+      star.classList.add('star');
+      if (i <= r.rating) star.classList.add('filled');
+      modalRating.appendChild(star);
+    }
+
+    renderComments();
+    detailModal.style.display = 'flex';
+    renderReviews();
+  };
+
+  const renderComments = () => {
+  const r = reviews[selectedReviewIndex];
+  commentList.innerHTML = '';
+
+  r.comments.forEach((c, idx) => {
+    const li = document.createElement('li');
+    li.textContent = c;
+
+    if (isAdmin) {
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '삭제';
+      deleteBtn.style.marginLeft = '10px';
+      deleteBtn.style.background = '#6a5acd';
+      deleteBtn.style.color = 'white';
+      deleteBtn.style.border = 'none';
+      deleteBtn.style.padding = '2px 8px';
+      deleteBtn.style.borderRadius = '4px';
+      deleteBtn.style.cursor = 'pointer';
+      deleteBtn.onclick = () => {
+        if (confirm('이 댓글을 삭제하시겠습니까?')) {
+          r.comments.splice(idx, 1);
+          renderComments();
+        }
+      };
+      li.appendChild(deleteBtn);
+    }
+
+    commentList.appendChild(li);
+  });
+};
+
+  document.getElementById('addCommentBtn').onclick = () => {
+    const comment = commentInput.value.trim();
+    if (comment && selectedReviewIndex !== null) {
+      reviews[selectedReviewIndex].comments.push(comment);
+      commentInput.value = '';
+      renderComments();
+    }
+  };
+
+  document.getElementById('submitReview').onclick = () => {
+    const title = document.getElementById('newTitle').value;
+    const author = document.getElementById('newAuthor').value;
+    const content = document.getElementById('newContent').value;
+    const rating = document.querySelectorAll('#starInput span.selected').length;
+    if (title && author && content) {
+      reviews.unshift({
+        id: reviews.length ? reviews[0].id + 1 : 1,
+        title, author, content, time: '방금 전', views: 0, rating, comments: []
+      });
+      currentPage = 1;
+      renderReviews();
+      document.getElementById('writeModal').style.display = 'none';
+    }
+  };
+
+  const deleteReview = (index) => {
+    if (confirm('삭제하시겠습니까?')) {
+      reviews.splice(index, 1);
+      renderReviews();
+    }
+  };
+
+  document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.onclick = () => btn.closest('.modal').style.display = 'none';
+  });
+
+  document.getElementById('addReviewBtn').onclick = () => {
+    document.getElementById('writeModal').style.display = 'flex';
+  };
+
+  document.getElementById('adminLoginBtn').onclick = () => {
+    document.getElementById('adminModal').style.display = 'flex';
+  };
+
+  document.getElementById('loginBtn').onclick = () => {
+    if (document.getElementById('adminPassword').value === '1234') {
+      isAdmin = true;
+      renderReviews();
+      document.getElementById('adminModal').style.display = 'none';
+    } else {
+      alert('비밀번호가 틀렸습니다.');
+    }
+  };
+
+  // ⭐ 별점 입력 UI
+  const starInput = document.getElementById('starInput');
+  starInput.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('span');
+    star.textContent = '★';
+    star.onclick = () => {
+      starInput.querySelectorAll('span').forEach((s, idx) => {
+        s.classList.toggle('selected', idx < i);
+      });
+    };
+    starInput.appendChild(star);
+  }
+
+  // ⭐ 검색 이벤트 연결
+  document.getElementById('searchInput').addEventListener('input', () => {
+    currentPage = 1;
+    renderReviews();
+  });
+
+  // 슬라이더
+  const slides = document.querySelector('.slides');
+  const slideImgs = slides.querySelectorAll('img');
+  const prevBtn = document.querySelector('.slide-btn.prev');
+  const nextBtn = document.querySelector('.slide-btn.next');
+  let currentIndex = 0;
+
+  const updateSlider = () => {
+    const slideWidth = slideImgs[0].offsetWidth + 10;
+    slides.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  };
+
+  prevBtn.onclick = () => {
+    if (currentIndex > 0) currentIndex--;
+    updateSlider();
+  };
+
+  nextBtn.onclick = () => {
+    if (currentIndex < slideImgs.length - 5) currentIndex++;
+    updateSlider();
+  };
+
+  setInterval(() => {
+    currentIndex = (currentIndex < slideImgs.length - 5) ? currentIndex + 1 : 0;
+    updateSlider();
+  }, 4000);
+
+  renderReviews();
+</script>
+
+
+
+
+
+
+
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const dropdownToggle = document.querySelector('.dropdown-toggle');
       const dropdown = dropdownToggle.closest('.dropdown');
-  
+
       dropdownToggle.addEventListener('click', function (e) {
         e.preventDefault();
         dropdown.classList.toggle('open');
       });
-  
+
       document.addEventListener('click', function (e) {
         if (!dropdown.contains(e.target)) {
           dropdown.classList.remove('open');
@@ -94,6 +898,21 @@
     });
   </script>
 
-  
+
+  <script defer src="script.js"></script>
+  <footer class="happyteam-footer">
+    <div class="footer-content">
+      <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+      <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+      <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+      <div class="footer-links">
+        <a href="#">서비스 이용약관</a> |
+        <a href="#">개인정보 처리방침</a> |
+        <a href="#">문의하기</a>
+      </div>
+      <p class="copyright">© 2024 MICO. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
+
 </html>
