@@ -864,7 +864,7 @@
         }
       });
     });
-  </script>
+ </script>
 
 
 <script type="module">
@@ -878,7 +878,7 @@
     doc,
     updateDoc
   } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-  
+
   const firebaseConfig = {
     apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
     authDomain: "mico-test-3b006.firebaseapp.com",
@@ -887,16 +887,17 @@
     messagingSenderId: "282703834529",
     appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
   };
-  
+
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const colRef = collection(db, "reviews");
-  
+
   let isAdmin = false;
   let reviews = [];
   let currentPage = 1;
   const reviewsPerPage = 10;
-  
+  let selectedReviewIndex = null;
+
   const reviewList = document.getElementById('reviewList');
   const pagination = document.getElementById('pagination');
   const searchInput = document.getElementById('searchInput');
@@ -907,15 +908,87 @@
   const modalRating = document.getElementById('modalRating');
   const commentList = document.getElementById('commentList');
   const commentInput = document.getElementById('commentInput');
-  
-  let selectedReviewIndex = null;
-  
-  async function fetchReviews() {
-    const snapshot = await getDocs(colRef);
-    reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
-    renderReviews();
+  const addCommentBtn = document.getElementById('addCommentBtn');
+
+  // 댓글 등록 기능
+  addCommentBtn.onclick = async () => {
+    const comment = commentInput.value.trim();
+    if (comment && selectedReviewIndex !== null) {
+      const review = reviews[selectedReviewIndex];
+      const fid = review.fid;
+      const newComments = [...(review.comments || []), comment];
+
+      try {
+        await updateDoc(doc(db, "reviews", fid), {
+          comments: newComments
+        });
+        commentInput.value = '';
+        reviews[selectedReviewIndex].comments = newComments;
+        renderComments();
+      } catch (error) {
+        console.error("댓글 저장 실패:", error);
+        alert("댓글 저장 중 문제가 발생했습니다.");
+      }
+    }
+  };
+
+  // 댓글 렌더링 함수
+  function renderComments() {
+    const r = reviews[selectedReviewIndex];
+    commentList.innerHTML = '';
+
+    (r.comments || []).forEach((c, idx) => {
+      const li = document.createElement('li');
+      li.textContent = c;
+
+      if (isAdmin) {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '삭제';
+        deleteBtn.style.marginLeft = '10px';
+        deleteBtn.style.background = '#6a5acd';
+        deleteBtn.style.color = 'white';
+        deleteBtn.style.border = 'none';
+        deleteBtn.style.padding = '2px 8px';
+        deleteBtn.style.borderRadius = '4px';
+        deleteBtn.style.cursor = 'pointer';
+        deleteBtn.onclick = async () => {
+          const updated = [...r.comments];
+          updated.splice(idx, 1);
+          await updateDoc(doc(db, "reviews", r.fid), { comments: updated });
+          reviews[selectedReviewIndex].comments = updated;
+          renderComments();
+        };
+        li.appendChild(deleteBtn);
+      }
+
+      commentList.appendChild(li);
+    });
   }
-  
+
+  // 후기 상세보기 열기
+  function openDetail(review) {
+    selectedReviewIndex = reviews.findIndex(r => r.fid === review.fid);
+    review.views++;
+    updateDoc(doc(db, "reviews", review.fid), { views: review.views });
+
+    modalTitle.textContent = review.title;
+    modalAuthor.textContent = review.author;
+    modalContent.textContent = review.content;
+
+    modalRating.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('span');
+      star.textContent = '★';
+      star.classList.add('star');
+      if (i <= review.rating) star.classList.add('filled');
+      modalRating.appendChild(star);
+    }
+
+    renderComments();
+    modal.style.display = 'flex';
+  }
+
+  // 후기 목록 렌더링
   function renderReviews() {
     reviewList.innerHTML = '';
     const keyword = searchInput.value.trim().toLowerCase();
@@ -926,7 +999,7 @@
     );
     const start = (currentPage - 1) * reviewsPerPage;
     const current = filtered.slice(start, start + reviewsPerPage);
-  
+
     current.forEach(r => {
       const row = document.createElement('tr');
       row.innerHTML = `
@@ -942,8 +1015,7 @@
       row.querySelector('.review-title').onclick = () => openDetail(r);
       reviewList.appendChild(row);
     });
-  
-    // 이벤트 위임 방식으로 삭제 버튼 처리
+
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.onclick = async () => {
         const fid = btn.getAttribute('data-fid');
@@ -953,11 +1025,11 @@
         }
       };
     });
-  
-    renderPagination(filtered.length);
+
     document.querySelector('.review-table').classList.toggle('admin-mode', isAdmin);
+    renderPagination(filtered.length);
   }
-  
+
   function renderPagination(total) {
     const totalPages = Math.ceil(total / reviewsPerPage);
     pagination.innerHTML = '';
@@ -972,23 +1044,18 @@
       pagination.appendChild(btn);
     }
   }
-  
-  function openDetail(review) {
-    selectedReviewIndex = reviews.findIndex(r => r.fid === review.fid);
-    review.views++;
-    updateDoc(doc(db, "reviews", review.fid), { views: review.views });
-  
-    modalTitle.textContent = review.title;
-    modalAuthor.textContent = review.author;
-    modalContent.textContent = review.content;
-    modalRating.innerHTML = '★'.repeat(review.rating);
-    modal.style.display = 'flex';
+
+  async function fetchReviews() {
+    const snapshot = await getDocs(colRef);
+    reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
+    renderReviews();
   }
-  
-  document.getElementById('addReviewBtn').onclick = () => {
-    document.getElementById('writeModal').style.display = 'flex';
+
+  // 초기화
+  window.onload = () => {
+    fetchReviews();
   };
-  
+
   document.getElementById('submitReview').onclick = async () => {
     const title = document.getElementById('newTitle').value;
     const author = document.getElementById('newAuthor').value;
@@ -1004,11 +1071,15 @@
       fetchReviews();
     }
   };
-  
+
+  document.getElementById('addReviewBtn').onclick = () => {
+    document.getElementById('writeModal').style.display = 'flex';
+  };
+
   document.getElementById('adminLoginBtn').onclick = () => {
     document.getElementById('adminModal').style.display = 'flex';
   };
-  
+
   document.getElementById('loginBtn').onclick = () => {
     if (document.getElementById('adminPassword').value === '1234') {
       isAdmin = true;
@@ -1018,25 +1089,35 @@
       alert('비밀번호가 틀렸습니다.');
     }
   };
-  
+
   document.querySelectorAll('.close-btn').forEach(btn => {
     btn.onclick = () => btn.closest('.modal').style.display = 'none';
   });
-  
+
   searchInput.addEventListener('input', () => {
     currentPage = 1;
     renderReviews();
   });
-  
-  window.onload = () => {
-    fetchReviews();
-  };
-  </script>
-  
+
+  // 별점 입력 UI
+  const starInput = document.getElementById('starInput');
+  starInput.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('span');
+    star.textContent = '★';
+    star.onclick = () => {
+      starInput.querySelectorAll('span').forEach((s, idx) => {
+        s.classList.toggle('selected', idx < i);
+      });
+    };
+    starInput.appendChild(star);
+  }
+</script>
+
   
 
 
-  <script defer src="script.js"></script>
+  
   <footer class="happyteam-footer">
     <div class="footer-content">
       <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
