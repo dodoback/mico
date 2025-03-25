@@ -877,7 +877,9 @@
     addDoc,
     deleteDoc,
     doc,
-    updateDoc
+    updateDoc,
+    query,       // ✅ 추가
+    orderBy      // ✅ 추가
   } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -911,6 +913,10 @@
   const commentInput = document.getElementById('commentInput');
   const addCommentBtn = document.getElementById('addCommentBtn');
 
+
+
+
+  
   // 댓글 등록 기능
   addCommentBtn.onclick = async () => {
     const comment = commentInput.value.trim();
@@ -1049,10 +1055,12 @@
   }
 
   async function fetchReviews() {
-    const snapshot = await getDocs(colRef);
-    reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
-    renderReviews();
-  }
+  // 🔥 여기 수정
+  const q = query(colRef, orderBy("id", "desc"));
+  const snapshot = await getDocs(q);
+  reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
+  renderReviews();
+}
 
   // 초기화
   window.onload = () => {
