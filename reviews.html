@@ -1001,21 +1001,23 @@
     const start = (currentPage - 1) * reviewsPerPage;
     const current = filtered.slice(start, start + reviewsPerPage);
 
-    current.forEach(r => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${r.id}</td>
-        <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
-        <td>${r.author}</td>
-        <td>${r.time}</td>
-        <td>${r.views}</td>
-        <td class="admin-col">
-          ${isAdmin ? `<button data-fid="${r.fid}" class="delete-btn">삭제</button>` : ''}
-        </td>
-      `;
-      row.querySelector('.review-title').onclick = () => openDetail(r);
-      reviewList.appendChild(row);
-    });
+    current.forEach((r, index) => {
+  const row = document.createElement('tr');
+  const no = (currentPage - 1) * reviewsPerPage + index + 1; // ← 1번부터 순차 번호
+  row.innerHTML = `
+    <td>${no}</td> <!-- 여기 변경 -->
+    <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
+    <td>${r.author}</td>
+    <td>${r.time}</td>
+    <td>${r.views}</td>
+    <td class="admin-col">
+      ${isAdmin ? `<button data-fid="${r.fid}" class="delete-btn">삭제</button>` : ''}
+    </td>
+  `;
+  row.querySelector('.review-title').onclick = () => openDetail(r);
+  reviewList.appendChild(row);
+});
+
 
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.onclick = async () => {

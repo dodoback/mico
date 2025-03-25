@@ -674,21 +674,21 @@ function closeModal() {
     const start = (currentPage - 1) * itemsPerPage;
     const paginated = filtered.slice(start, start + itemsPerPage);
 
-    paginated.forEach(item => {
-      const tr = document.createElement('tr');
-      tr.dataset.fid = item.fid;
-      tr.innerHTML = `
-        <td>${item.id}</td>
-        <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
-        <td>${item.service}</td>
-        <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
-        <td>${item.author}</td>
-        <td>${item.date}</td>
-        <td>${item.views}</td>
-        <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+    paginated.forEach((item, idx) => {
+  const tr = document.createElement('tr');
+  tr.dataset.fid = item.fid;
+  tr.innerHTML = `
+    <td>${(currentPage - 1) * itemsPerPage + idx + 1}</td>
+    <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
+    <td>${item.service}</td>
+    <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
+    <td>${item.author}</td>
+    <td>${item.date}</td>
+    <td>${item.views}</td>
+    <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
+  `;
+  tbody.appendChild(tr);
+});
 
     renderPagination(filtered.length);
   }
