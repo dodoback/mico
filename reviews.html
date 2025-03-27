@@ -111,7 +111,11 @@
          
         </table>
          <!-- ✅ 페이지네이션을 테이블 밖으로 이동 -->
-  <div class="pagination" id="pagination"></div>
+  <div class="pagination" id="pagination">
+    <button class="prev" onclick="changePage('prev')">‹ 이전</button>
+  <div class="page-buttons"></div>
+  <button class="next" onclick="changePage('next')">다음 ›</button>
+  </div>
       </div>
     </section>
 
@@ -168,7 +172,9 @@
 
 
 
-  <style>
+ <style>
+
+ 
     /* ===== 전체 후기 영역 ===== */
     .review-section {
       padding: 60px 40px;
@@ -606,84 +612,119 @@
   color: gold;
 }
 
-  </style>
+.pagination button {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.pagination button.active {
+  background: #6a5acd;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+</style>
 
 
 <script>
  
 
-  // ⭐ 검색 필터 기반으로 페이지네이션 계산
-  const renderPagination = (filteredLength = reviews.length) => {
-    const totalPages = Math.ceil(filteredLength / reviewsPerPage);
-    pagination.innerHTML = '';
+ const renderPagination = (filteredLength = reviews.length) => {
+  const totalPages = Math.ceil(filteredLength / reviewsPerPage);
+  pagination.innerHTML = '';
 
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '‹ 이전';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderReviews();
-      }
-    };
-    pagination.appendChild(prevBtn);
-
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add('active');
-      btn.onclick = () => {
-        currentPage = i;
-        renderReviews();
-      };
-      pagination.appendChild(btn);
+  const prevBtn = document.createElement('button');
+  prevBtn.textContent = '‹ 이전';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderReviews();
     }
+  };
+  pagination.appendChild(prevBtn);
 
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '다음 ›';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderReviews();
+  // 페이지 번호 버튼 추가
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    if (i === currentPage) btn.classList.add('active');
+    btn.onclick = () => {
+      currentPage = i;
+      renderReviews();
+    };
+    pagination.appendChild(btn);
+  }
+
+  const nextBtn = document.createElement('button');
+  nextBtn.textContent = '다음 ›';
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderReviews();
+    }
+  };
+  pagination.appendChild(nextBtn);
+};
+
+
+const renderReviews = () => {
+  reviewList.innerHTML = '';
+  
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  const filtered = reviews.filter(r =>
+    r.title.toLowerCase().includes(keyword) ||
+    r.author.toLowerCase().includes(keyword) ||
+    r.content.toLowerCase().includes(keyword)
+  );
+  
+  const totalPages = Math.ceil(filtered.length / reviewsPerPage);
+  const start = (currentPage - 1) * reviewsPerPage;
+  const current = filtered.slice(start, start + reviewsPerPage);
+
+  current.forEach((r, index) => {
+    const row = document.createElement('tr');
+    const no = (currentPage - 1) * reviewsPerPage + index + 1; // ← 1번부터 순차 번호
+    row.innerHTML = `
+      <td>${no}</td> <!-- 여기 변경 -->
+      <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
+      <td>${r.author}</td>
+      <td>${r.time}</td>
+      <td>${r.views}</td>
+      <td class="admin-col">
+        ${isAdmin ? `<button data-fid="${r.fid}" class="delete-btn">삭제</button>` : ''}
+      </td>
+    `;
+    row.querySelector('.review-title').onclick = () => openDetail(r);
+    reviewList.appendChild(row);
+  });
+
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.onclick = async () => {
+      const fid = btn.getAttribute('data-fid');
+      if (confirm('삭제하시겠습니까?')) {
+        await deleteDoc(doc(db, "reviews", fid));
+        fetchReviews();
       }
     };
-    pagination.appendChild(nextBtn);
-  };
+  });
 
-  const renderReviews = () => {
-    reviewList.innerHTML = '';
+  document.querySelector('.review-table').classList.toggle('admin-mode', isAdmin);
+  renderPagination(filtered.length);
+};
 
-    const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
-    const filtered = reviews.filter(r =>
-      r.title.toLowerCase().includes(keyword) ||
-      r.author.toLowerCase().includes(keyword) ||
-      r.content.toLowerCase().includes(keyword)
-    );
-
-    const totalPages = Math.ceil(filtered.length / reviewsPerPage);
-    const start = (currentPage - 1) * reviewsPerPage;
-    const end = start + reviewsPerPage;
-    const currentReviews = filtered.slice(start, end);
-
-    currentReviews.forEach((r) => {
-      const globalIndex = reviews.indexOf(r); // 원본 인덱스
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${r.id}</td>
-        <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
-        <td>${r.author}</td>
-        <td>${r.time}</td>
-        <td>${r.views}</td>
-        <td class="admin-col"><button onclick="deleteReview(${globalIndex})">삭제</button></td>
-      `;
-      row.querySelector('.review-title').onclick = () => openDetail(globalIndex);
-      reviewList.appendChild(row);
-    });
-
-    document.querySelector('.review-table').classList.toggle('admin-mode', isAdmin);
-    renderPagination(filtered.length);
-  };
 
   const openDetail = (index) => {
     const r = reviews[index];
@@ -1040,19 +1081,46 @@
   }
 
   function renderPagination(total) {
-    const totalPages = Math.ceil(total / reviewsPerPage);
-    pagination.innerHTML = '';
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add('active');
-      btn.onclick = () => {
-        currentPage = i;
-        renderReviews();
-      };
-      pagination.appendChild(btn);
+  const totalPages = Math.ceil(total / reviewsPerPage);
+  pagination.innerHTML = '';
+
+  // 이전 버튼
+  const prevBtn = document.createElement('button');
+  prevBtn.textContent = '‹ 이전';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderReviews();
     }
+  };
+  pagination.appendChild(prevBtn);
+
+  // 페이지 번호 버튼
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    if (i === currentPage) btn.classList.add('active');
+    btn.onclick = () => {
+      currentPage = i;
+      renderReviews();
+    };
+    pagination.appendChild(btn);
   }
+
+  // 다음 버튼
+  const nextBtn = document.createElement('button');
+  nextBtn.textContent = '다음 ›';
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderReviews();
+    }
+  };
+  pagination.appendChild(nextBtn);
+}
+
 
   async function fetchReviews() {
   // 🔥 여기 수정
