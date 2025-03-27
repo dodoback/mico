@@ -74,10 +74,12 @@
       margin-bottom: 100px;
     }
 
+
+
     .card {
       background-color: #1c1c1c;
       color: white;
-      padding: 20px;
+      padding: 8px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease-in-out, background-color 0.3s;
@@ -106,7 +108,7 @@
     .card-content {
       font-size: 14px;
       color: #bdc3c7;
-      margin-top: 5px;
+      margin-top: 3px;
       text-align: center;
     }
 
@@ -201,26 +203,23 @@
 
     /* 카드 스타일 */
     .card {
-      background-color: #1c1c1c;
-      /* 다크 테마 배경 */
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease-in-out, background-color 0.3s;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-    }
+  height: auto; /* or 생략 */
+  min-height: 300px;  /* 기존보다 약간 크게 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 이미지 기준 정렬 */
+}
 
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
+
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5; /* 이미지 비율이 세로형일 경우 */
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #000; /* 빈 공간을 자연스럽게 처리 */
+}
+
 
     .card-title {
       font-size: 16px;
@@ -331,23 +330,87 @@
   let currentPage = 1;
   const itemsPerPage = 9;
   const patchData = [
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '2025년 2월 롤 패치', content: '스트리머 모드 추가, 거친된 삶 효과 nerf', image: 'patch1.jpg', link: 'https://www.example.com/patch1' },
-    { title: '우르프 & 신규 스킨 패치예정', content: '신규 프레스티지 스킨/우르프 모드 업데이트', image: 'patch2.jpg', link: 'https://www.example.com/patch2' },
-    { title: '2025년 첫 패치', content: '주요 버그 수정 및 해결', image: 'patch3.jpg', link: 'https://www.example.com/patch3' },
-    // 추가 데이터 더 넣을 수 있음
-  ];
+  {
+    title: '14.6 패치 노트',
+    content: '아리 프레스티지 출시, 일부 스킬 밸런스 조정',
+    image: '공지사항/Image 14.6.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-6-notes/'
+  },
+  {
+    title: '14.5 패치 노트',
+    content: '정글 및 미드 메타 조정, 신규 스킨 출시',
+    image: '공지사항/Image 14.5.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-5-notes/'
+  },
+  {
+    title: '14.4 패치 노트',
+    content: '신화급 아이템 추가, 티모 및 일부 챔피언 변경',
+    image: '공지사항/Image 14.4.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-4-notes/'
+  },
+  {
+    title: '14.3 패치 노트',
+    content: '챔피언 대규모 밸런스 조정 및 신규 스킨 출시',
+    image: '공지사항/Image 14.3.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-3-notes/'
+  },
+  {
+    title: '14.2 패치 노트',
+    content: '조이 신규 스킨 및 버그 수정',
+    image: '공지사항/Image 14.2.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-2-notes/'
+  },
+  {
+    title: '14.1B 패치 노트',
+    content: '시즌 시작 직전 챔피언 밸런스 핫픽스',
+    image: '공지사항/Image 14.1B.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1b-notes/'
+  },
+  {
+    title: '14.1 패치 노트',
+    content: '2025 시즌 랭크 초기화 및 아이템 리워크',
+    image: '공지사항/Image 14.1.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1-notes/'
+  },
+  {
+    title: '13.24 패치 노트',
+    content: '프리시즌 아이템 실험 및 밸런스 변경',
+    image: '공지사항/Image 13.24.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-24-notes/'
+  },
+  {
+    title: '13.23 패치 노트',
+    content: '챔피언 밸런스 조정 및 신규 콘텐츠 예고',
+    image: '공지사항/Image 13.23.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-23-notes/'
+  },
+  {
+    title: '13.22 패치 노트',
+    content: '이즈리얼 및 카이사 스킬 밸런스 수정',
+    image: '공지사항/Image 13.22.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-22-notes/'
+  },
+  {
+    title: '13.21 패치 노트',
+    content: '정글 변경 및 룬 조정, 신규 스킨 출시',
+    image: '공지사항/Image 13.21.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-21-notes/'
+  },
+  {
+    title: '13.20 패치 노트',
+    content: '게임 템포 개선, 일부 챔피언 리워크 적용',
+    image: '공지사항/Image 13.20.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-20-notes/'
+  },
+  {
+    title: '13.19 패치 노트',
+    content: '월즈 챔피언십 메타 패치',
+    image: '공지사항/Image 13.19.png',
+    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-19-notes/'
+  }
+];
+
+
 
   function renderCards() {
     const cardsContainer = document.querySelector('.cards-container');
