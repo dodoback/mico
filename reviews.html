@@ -92,6 +92,7 @@
           <input type="text" id="searchInput" placeholder="Search" class="review-search" />
           <button id="addReviewBtn">후기 작성</button>
           <button id="adminLoginBtn">관리자 로그인</button>
+          <button id="logoutBtn" style="display:none;">로그아웃</button>
         </div>
       </div>
       <div class="review-box">
@@ -159,15 +160,17 @@
       </div>
     </div>
 
-    <!-- 관리자 로그인 모달 -->
-    <div class="modal" id="adminModal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h3>관리자 로그인</h3>
-        <input type="password" id="adminPassword" placeholder="비밀번호 입력" />
-        <button id="loginBtn">로그인</button>
-      </div>
-    </div>
+   <!-- 관리자 로그인 모달 -->
+<div class="modal" id="adminModal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3>관리자 로그인</h3>
+    <input type="email" id="adminEmail" placeholder="이메일 입력" />
+    <input type="password" id="adminPassword" placeholder="비밀번호 입력" />
+    <button id="loginBtn">로그인</button>
+  </div>
+</div>
+
   </main>
 
 
@@ -789,21 +792,7 @@ const renderReviews = () => {
     }
   };
 
-  document.getElementById('submitReview').onclick = () => {
-    const title = document.getElementById('newTitle').value;
-    const author = document.getElementById('newAuthor').value;
-    const content = document.getElementById('newContent').value;
-    const rating = document.querySelectorAll('#starInput span.selected').length;
-    if (title && author && content) {
-      reviews.unshift({
-        id: reviews.length ? reviews[0].id + 1 : 1,
-        title, author, content, time: '방금 전', views: 0, rating, comments: []
-      });
-      currentPage = 1;
-      renderReviews();
-      document.getElementById('writeModal').style.display = 'none';
-    }
-  };
+ 
 
   const deleteReview = (index) => {
     if (confirm('삭제하시겠습니까?')) {
@@ -816,6 +805,15 @@ const renderReviews = () => {
     btn.onclick = () => btn.closest('.modal').style.display = 'none';
   });
 
+  document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+
+
   document.getElementById('addReviewBtn').onclick = () => {
     document.getElementById('writeModal').style.display = 'flex';
   };
@@ -824,15 +822,22 @@ const renderReviews = () => {
     document.getElementById('adminModal').style.display = 'flex';
   };
 
-  document.getElementById('loginBtn').onclick = () => {
-    if (document.getElementById('adminPassword').value === '1234') {
-      isAdmin = true;
-      renderReviews();
-      document.getElementById('adminModal').style.display = 'none';
-    } else {
-      alert('비밀번호가 틀렸습니다.');
-    }
-  };
+  document.getElementById('loginBtn').onclick = async () => {
+  const email = document.getElementById('adminEmail').value;
+  const password = document.getElementById('adminPassword').value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password); // ✅ 실제 인증
+    isAdmin = true;
+    fetchReviews();
+    document.getElementById('adminModal').style.display = 'none';
+    alert("로그인 성공!");
+  } catch (err) {
+    alert("로그인 실패: " + err.message);
+  }
+};
+
+
 
   // ⭐ 별점 입력 UI
   const starInput = document.getElementById('starInput');
@@ -890,26 +895,47 @@ const renderReviews = () => {
 
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const dropdownToggle = document.querySelector('.dropdown-toggle');
-      const dropdown = dropdownToggle.closest('.dropdown');
-
-      dropdownToggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        dropdown.classList.toggle('open');
-      });
-
-      document.addEventListener('click', function (e) {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove('open');
-        }
-      });
-    });
- </script>
-
-
 <script type="module">
+document.getElementById('submitReview').onclick = async () => {
+  const title = document.getElementById('newTitle').value.trim();
+  const author = document.getElementById('newAuthor').value.trim();
+  const content = document.getElementById('newContent').value.trim();
+  const rating = document.querySelectorAll('#starInput span.selected').length;
+  const time = new Date().toLocaleDateString();
+
+  if (title && author && content) {
+    try {
+      await addDoc(colRef, {
+        id: Date.now(),
+        title,
+        author,
+        content,
+        time,
+        views: 0,
+        rating,
+        comments: []
+      });
+
+      // 입력 폼 초기화
+      document.getElementById('newTitle').value = '';
+      document.getElementById('newAuthor').value = '';
+      document.getElementById('newContent').value = '';
+      document.querySelectorAll('#starInput span').forEach(s => s.classList.remove('selected'));
+
+      document.getElementById('writeModal').style.display = 'none';
+      fetchReviews();
+    } catch (error) {
+      console.error("후기 등록 실패:", error);
+      alert("후기 등록 중 문제가 발생했습니다.");
+    }
+  } else {
+    alert("제목, 작성자, 내용을 모두 입력해주세요.");
+  }
+};
+
+
+
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
   import {
     getFirestore,
@@ -919,8 +945,8 @@ const renderReviews = () => {
     deleteDoc,
     doc,
     updateDoc,
-    query,       // ✅ 추가
-    orderBy      // ✅ 추가
+    query,
+    orderBy
   } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -934,6 +960,7 @@ const renderReviews = () => {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const auth = getAuth(app);
   const colRef = collection(db, "reviews");
 
   let isAdmin = false;
@@ -954,11 +981,6 @@ const renderReviews = () => {
   const commentInput = document.getElementById('commentInput');
   const addCommentBtn = document.getElementById('addCommentBtn');
 
-
-
-
-  
-  // 댓글 등록 기능
   addCommentBtn.onclick = async () => {
     const comment = commentInput.value.trim();
     if (comment && selectedReviewIndex !== null) {
@@ -980,7 +1002,6 @@ const renderReviews = () => {
     }
   };
 
-  // 댓글 렌더링 함수
   function renderComments() {
     const r = reviews[selectedReviewIndex];
     commentList.innerHTML = '';
@@ -992,13 +1013,7 @@ const renderReviews = () => {
       if (isAdmin) {
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '삭제';
-        deleteBtn.style.marginLeft = '10px';
-        deleteBtn.style.background = '#6a5acd';
-        deleteBtn.style.color = 'white';
-        deleteBtn.style.border = 'none';
-        deleteBtn.style.padding = '2px 8px';
-        deleteBtn.style.borderRadius = '4px';
-        deleteBtn.style.cursor = 'pointer';
+        deleteBtn.className = 'comment-delete';
         deleteBtn.onclick = async () => {
           const updated = [...r.comments];
           updated.splice(idx, 1);
@@ -1013,7 +1028,6 @@ const renderReviews = () => {
     });
   }
 
-  // 후기 상세보기 열기
   function openDetail(review) {
     selectedReviewIndex = reviews.findIndex(r => r.fid === review.fid);
     review.views++;
@@ -1036,7 +1050,6 @@ const renderReviews = () => {
     modal.style.display = 'flex';
   }
 
-  // 후기 목록 렌더링
   function renderReviews() {
     reviewList.innerHTML = '';
     const keyword = searchInput.value.trim().toLowerCase();
@@ -1049,22 +1062,21 @@ const renderReviews = () => {
     const current = filtered.slice(start, start + reviewsPerPage);
 
     current.forEach((r, index) => {
-  const row = document.createElement('tr');
-  const no = (currentPage - 1) * reviewsPerPage + index + 1; // ← 1번부터 순차 번호
-  row.innerHTML = `
-    <td>${no}</td> <!-- 여기 변경 -->
-    <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
-    <td>${r.author}</td>
-    <td>${r.time}</td>
-    <td>${r.views}</td>
-    <td class="admin-col">
-      ${isAdmin ? `<button data-fid="${r.fid}" class="delete-btn">삭제</button>` : ''}
-    </td>
-  `;
-  row.querySelector('.review-title').onclick = () => openDetail(r);
-  reviewList.appendChild(row);
-});
-
+      const row = document.createElement('tr');
+      const no = (currentPage - 1) * reviewsPerPage + index + 1;
+      row.innerHTML = `
+        <td>${no}</td>
+        <td class="review-title" style="cursor:pointer;color:#90c3f9;">${r.title}</td>
+        <td>${r.author}</td>
+        <td>${r.time}</td>
+        <td>${r.views}</td>
+        <td class="admin-col">
+          ${isAdmin ? `<button data-fid="${r.fid}" class="delete-btn">삭제</button>` : ''}
+        </td>
+      `;
+      row.querySelector('.review-title').onclick = () => openDetail(r);
+      reviewList.appendChild(row);
+    });
 
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.onclick = async () => {
@@ -1081,117 +1093,104 @@ const renderReviews = () => {
   }
 
   function renderPagination(total) {
-  const totalPages = Math.ceil(total / reviewsPerPage);
-  pagination.innerHTML = '';
+    const totalPages = Math.ceil(total / reviewsPerPage);
+    pagination.innerHTML = '';
 
-  // 이전 버튼
-  const prevBtn = document.createElement('button');
-  prevBtn.textContent = '‹ 이전';
-  prevBtn.disabled = currentPage === 1;
-  prevBtn.onclick = () => {
-    if (currentPage > 1) {
-      currentPage--;
-      renderReviews();
-    }
-  };
-  pagination.appendChild(prevBtn);
-
-  // 페이지 번호 버튼
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    if (i === currentPage) btn.classList.add('active');
-    btn.onclick = () => {
-      currentPage = i;
-      renderReviews();
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '‹ 이전';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderReviews();
+      }
     };
-    pagination.appendChild(btn);
+    pagination.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.onclick = () => {
+        currentPage = i;
+        renderReviews();
+      };
+      pagination.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = '다음 ›';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderReviews();
+      }
+    };
+    pagination.appendChild(nextBtn);
   }
 
-  // 다음 버튼
-  const nextBtn = document.createElement('button');
-  nextBtn.textContent = '다음 ›';
-  nextBtn.disabled = currentPage === totalPages;
-  nextBtn.onclick = () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderReviews();
+  async function fetchReviews() {
+    const q = query(colRef, orderBy("id", "desc"));
+    const snapshot = await getDocs(q);
+    reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
+    renderReviews();
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const token = await user.getIdTokenResult();
+      isAdmin = !!token.claims.admin;
+      document.getElementById('logoutBtn').style.display = isAdmin ? 'block' : 'none';
+    } else {
+      isAdmin = false;
+      document.getElementById('logoutBtn').style.display = 'none';
+    }
+    fetchReviews();
+  });
+
+  document.getElementById('loginBtn').onclick = async () => {
+    const email = document.getElementById('adminEmail').value;
+    const password = document.getElementById('adminPassword').value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdTokenResult();
+
+      if (token.claims.admin) {
+        isAdmin = true;
+        document.getElementById('adminModal').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'block';
+        alert("관리자 로그인 성공!");
+        fetchReviews();
+      } else {
+        alert("관리자 권한이 없습니다.");
+        await signOut(auth);
+      }
+    } catch (err) {
+      alert("로그인 실패: " + err.message);
     }
   };
-  pagination.appendChild(nextBtn);
-}
 
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      alert("로그아웃 되었습니다.");
+      location.reload();
+    } catch (err) {
+      alert("로그아웃 실패: " + err.message);
+    }
+  });
 
-  async function fetchReviews() {
-  // 🔥 여기 수정
-  const q = query(colRef, orderBy("id", "desc"));
-  const snapshot = await getDocs(q);
-  reviews = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
-  renderReviews();
-}
-
-  // 초기화
   window.onload = () => {
     fetchReviews();
   };
 
-  document.getElementById('submitReview').onclick = async () => {
-    const title = document.getElementById('newTitle').value;
-    const author = document.getElementById('newAuthor').value;
-    const content = document.getElementById('newContent').value;
-    const rating = document.querySelectorAll('#starInput span.selected').length;
-    const time = new Date().toLocaleDateString();
-    if (title && author && content) {
-      await addDoc(colRef, {
-        id: Date.now(),
-        title, author, content, time, views: 0, rating, comments: []
-      });
-      document.getElementById('writeModal').style.display = 'none';
-      fetchReviews();
-    }
-  };
 
-  document.getElementById('addReviewBtn').onclick = () => {
-    document.getElementById('writeModal').style.display = 'flex';
-  };
 
-  document.getElementById('adminLoginBtn').onclick = () => {
-    document.getElementById('adminModal').style.display = 'flex';
-  };
-
-  document.getElementById('loginBtn').onclick = () => {
-    if (document.getElementById('adminPassword').value === '1234') {
-      isAdmin = true;
-      fetchReviews();
-      document.getElementById('adminModal').style.display = 'none';
-    } else {
-      alert('비밀번호가 틀렸습니다.');
-    }
-  };
-
-  document.querySelectorAll('.close-btn').forEach(btn => {
-    btn.onclick = () => btn.closest('.modal').style.display = 'none';
-  });
-
-  searchInput.addEventListener('input', () => {
-    currentPage = 1;
-    renderReviews();
-  });
-
-  // 별점 입력 UI
-  const starInput = document.getElementById('starInput');
-  starInput.innerHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement('span');
-    star.textContent = '★';
-    star.onclick = () => {
-      starInput.querySelectorAll('span').forEach((s, idx) => {
-        s.classList.toggle('selected', idx < i);
-      });
-    };
-    starInput.appendChild(star);
-  }
+  
 </script>
+
 
   
 

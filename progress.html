@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>미코팀 | 작업현황</title>
   <link rel="stylesheet" href="styles.css" />
-  
+
 </head>
+
 <body>
   <header class="site-header">
     <a href="index.html" class="logo">미코팀</a>
-     <!-- 햄버거 버튼 -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
+    <!-- 햄버거 버튼 -->
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
 
-  <!-- 네비게이션 -->
-  <nav>
-    <ul class="nav-links">
-      <li><a href="lineup.html">기사 라인업</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle">가격표</a>
-        <ul class="dropdown-menu">
-          <li><a href="price-delegation.html">대리 가격</a></li>
-          <li><a href="price-duo.html">듀오 가격</a></li>
-          <li><a href="price-placement.html">배치 고사</a></li>
-          <li><a href="price-coaching.html">1:1 강의</a></li>
-          <li><a href="price-growth.html">육성</a></li>
-          <li><a href="price-consulting.html">기타서비스</a></li>
-        </ul>
-      </li>
-      <li><a href="certification.html">작업인증</a></li>
-      <li><a href="progress.html">작업현황</a></li>
-      <li><a href="reviews.html">고객후기</a></li>
-      <li><a href="notice.html">공지사항</a></li>
-    </ul>
-  </nav>
+    <!-- 네비게이션 -->
+    <nav>
+      <ul class="nav-links">
+        <li><a href="lineup.html">기사 라인업</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">가격표</a>
+          <ul class="dropdown-menu">
+            <li><a href="price-delegation.html">대리 가격</a></li>
+            <li><a href="price-duo.html">듀오 가격</a></li>
+            <li><a href="price-placement.html">배치 고사</a></li>
+            <li><a href="price-coaching.html">1:1 강의</a></li>
+            <li><a href="price-growth.html">육성</a></li>
+            <li><a href="price-consulting.html">기타서비스</a></li>
+          </ul>
+        </li>
+        <li><a href="certification.html">작업인증</a></li>
+        <li><a href="progress.html">작업현황</a></li>
+        <li><a href="reviews.html">고객후기</a></li>
+        <li><a href="notice.html">공지사항</a></li>
+      </ul>
+    </nav>
 
 
-  
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.querySelector('.dropdown-toggle');
-      const menu = document.querySelector('.dropdown-menu');
-  
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.toggle('open');
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.dropdown-toggle');
+        const menu = document.querySelector('.dropdown-menu');
+
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          menu.classList.toggle('open');
+        });
       });
-    });
-  </script>
+    </script>
     <a href="#" class="contact-btn">
       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
     </a>
   </header>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const dropdownToggle = document.querySelector('.dropdown-toggle');
       const dropdown = dropdownToggle.closest('.dropdown');
-  
+
       dropdownToggle.addEventListener('click', function (e) {
         e.preventDefault();
         dropdown.classList.toggle('open');
       });
-  
+
       document.addEventListener('click', function (e) {
         if (!dropdown.contains(e.target)) {
           dropdown.classList.remove('open');
@@ -77,26 +79,25 @@
   </script>
 
 
-<style>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.75);
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
+      /* 중앙 정렬 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  /* 중앙 정렬 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 모달 */
-.modal {
+    /* 모달 */
+    .modal {
       display: none;
       position: fixed;
       z-index: 999;
@@ -104,7 +105,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
       margin-top: 50px;
@@ -114,10 +115,10 @@
       max-width: 80%;
       max-height: 80%;
       border-radius: 8px;
-position: relative;
-top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .modal-close {
@@ -129,311 +130,317 @@ top: 50%;
       cursor: pointer;
     }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-
-
-
-
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: white; /* 전체 배경은 블랙 */
-  }
-
-  .progress-section {
-    background: #111; /* 섹션 내부만 어둡게 */
-    color: #fff;
-    padding: 40px 5vw;
-    
-  }
-
- .filters {
-  display: flex;
-  justify-content: flex-end; /* 👉 오른쪽 정렬 */
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-  .filters select,
-  .filters input {
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: none;
-  }
-
-  .progress-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #1c1c1c;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .progress-table th,
-  .progress-table td {
-    text-align: left;
-    padding: 14px 10px;
-    border-bottom: 1px solid #2c2c2c;
-  }
-
-  .progress-table thead {
-    background-color: #2a2a2a;
-  }
-
-  .progress-table thead th {
-    color: #ffe600;
-  }
-
-  .badge {
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    display: inline-block;
-  }
-
-  .badge-progress {
-    background-color: #ffe600;
-    color: #111;
-  }
-
-  .badge-done {
-    background-color: #444;
-    color: #aaa;
-  }
-
-  .btn {
-    padding: 4px 8px;
-    font-size: 13px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-
-  .btn-edit {
-    background-color: #4caf50;
-    color: white;
-  }
-
-  .btn-delete {
-    background-color: #f44336;
-    color: white;
-  }
-
-  .pagination {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .pagination button {
-    background-color: #1c1c1c;
-    border: 1px solid #444;
-    color: #fff;
-    padding: 6px 12px;
-    margin: 0 2px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .pagination button.active {
-    background-color: #ffe600;
-    color: #111;
-  }
-
-  .login-area {
-    text-align: right;
-    margin-bottom: 20px;
-    position: relative;
-    bottom: 50px;
-    margin-top: 100px;
-  }
-
-  .login-area input[type="password"] {
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: none;
-  }
-
-  .login-area button {
-    padding: 6px 10px;
-    border: none;
-    background-color: #ffe600;
-    border-radius: 4px;
-    margin-left: 6px;
-    cursor: pointer;
-  }
-
-</style>
-</head>
-<body>
-  <section class="progress-section">
-    <div class="login-area">
-      <input type="password" id="adminPassword" placeholder="관리자 비밀번호" />
-      <button onclick="login()">로그인</button>
-    </div>
-  
-    <div class="filters">
-      <select id="statusFilter" onchange="renderTable()">
-        <option value="전체">상태 전체</option>
-        <option value="진행중">진행중</option>
-        <option value="작업완료">작업완료</option>
-      </select>
-      <select id="serviceFilter" onchange="renderTable()">
-        <option value="전체">서비스 전체</option>
-        <option value="강의">강의</option>
-        <option value="듀오">듀오</option>
-        <option value="대리">대리</option>
-      </select>
-      <input type="text" id="searchInput" placeholder="제목 검색..." oninput="renderTable()" />
-    </div>
-  
-    <table class="progress-table">
-      <thead>
-        <tr>
-          <th>번호</th>
-          <th>상태</th>
-          <th>서비스</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <th>조회수</th>
-          <th>관리</th>
-        </tr>
-      </thead>
-      <tbody id="progressBody"></tbody>
-    </table>
-  
-    <div class="pagination" id="pagination"></div>
-  </section>
-  
-   <!-- 상세보기 모달 -->
-   <div id="imageModal" class="modal">
-    <span class="modal-close" id="closeModal">&times;</span>
-    <img class="modal-content" id="modalImage" src="img/언랭크-이미지.png" alt="상세 이미지">
-  </div>
- 
-  
-  <script>
-    const data = [
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "듀오",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "작업완료", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "작업완료", service: "듀오",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "작업완료", service: "강의",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "진행중", service: "대리",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 506, status: "작업완료", service: "강의",
-        title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
-        author: "미코팀", date: "2025-03-21", views: 17,
-        image: "img/일반.webp"
-      },
-      {
-        id: 505, status: "작업완료", service: "듀오",
-        title: "3월 20일 | 350건 완료 | 듀오 정글 | 챌린저 티어",
-        author: "미코팀", date: "2025-03-20", views: 12,
-        image: "img/일반.webp"
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
       }
-    ];
-  
-    let isAdmin = false;
-  let currentPage = 1;
-  const itemsPerPage = 10;
 
-  function login() {
-    const pw = document.getElementById('adminPassword').value;
-    if (pw === '1234') {
-      isAdmin = true;
-      alert("관리자 로그인 성공!");
-      renderTable();
-    } else {
-      alert("비밀번호가 틀렸습니다.");
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
-  }
 
-  function renderTable() {
-    const statusFilter = document.getElementById('statusFilter').value;
-    const serviceFilter = document.getElementById('serviceFilter').value;
-    const search = document.getElementById('searchInput').value.toLowerCase();
 
-    let filtered = data.filter(item => {
-      return (
-        (statusFilter === "전체" || item.status === statusFilter) &&
-        (serviceFilter === "전체" || item.service === serviceFilter) &&
-        item.title.toLowerCase().includes(search)
-      );
-    });
 
-    const tbody = document.getElementById('progressBody');
-    tbody.innerHTML = '';
 
-    const start = (currentPage - 1) * itemsPerPage;
-    const paginated = filtered.slice(start, start + itemsPerPage);
 
-    paginated.forEach(item => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: white;
+      /* 전체 배경은 블랙 */
+    }
+
+    .progress-section {
+      background: #111;
+      /* 섹션 내부만 어둡게 */
+      color: #fff;
+      padding: 40px 5vw;
+
+    }
+
+    .filters {
+      display: flex;
+      justify-content: flex-end;
+      /* 👉 오른쪽 정렬 */
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filters select,
+    .filters input {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .progress-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1c1c1c;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-table th,
+    .progress-table td {
+      text-align: left;
+      padding: 14px 10px;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .progress-table thead {
+      background-color: #2a2a2a;
+    }
+
+    .progress-table thead th {
+      color: #ffe600;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .badge-progress {
+      background-color: #ffe600;
+      color: #111;
+    }
+
+    .badge-done {
+      background-color: #444;
+      color: #aaa;
+    }
+
+    .btn {
+      padding: 4px 8px;
+      font-size: 13px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .btn-edit {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .btn-delete {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .pagination {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      background-color: #1c1c1c;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 6px 12px;
+      margin: 0 2px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background-color: #ffe600;
+      color: #111;
+    }
+
+    .login-area {
+      text-align: right;
+      margin-bottom: 20px;
+      position: relative;
+      bottom: 50px;
+      margin-top: 100px;
+    }
+
+    .login-area input[type="password"] {
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .login-area button {
+      padding: 6px 10px;
+      border: none;
+      background-color: #ffe600;
+      border-radius: 4px;
+      margin-left: 6px;
+      cursor: pointer;
+    }
+  </style>
+  </head>
+
+  <body>
+    <section class="progress-section">
+      <!-- ✅ login-area 수정 -->
+      <div class="login-area" id="loginArea">
+        <input type="email" id="adminEmail" placeholder="이메일" />
+        <input type="password" id="adminPassword" placeholder="비밀번호" />
+        <button onclick="login()" id="loginBtn">로그인</button>
+        <button onclick="logout()" id="logoutBtn" style="display: none;">로그아웃</button>
+      </div>
+      
+
+
+      <div class="filters">
+        <select id="statusFilter" onchange="renderTable()">
+          <option value="전체">상태 전체</option>
+          <option value="진행중">진행중</option>
+          <option value="작업완료">작업완료</option>
+        </select>
+        <select id="serviceFilter" onchange="renderTable()">
+          <option value="전체">서비스 전체</option>
+          <option value="강의">강의</option>
+          <option value="듀오">듀오</option>
+          <option value="대리">대리</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="제목 검색..." oninput="renderTable()" />
+      </div>
+
+      <table class="progress-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>상태</th>
+            <th>서비스</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody id="progressBody"></tbody>
+      </table>
+
+      <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- 상세보기 모달 -->
+    <div id="imageModal" class="modal">
+      <span class="modal-close" id="closeModal">&times;</span>
+      <img class="modal-content" id="modalImage" src="img/언랭크-이미지.png" alt="상세 이미지">
+    </div>
+
+
+    <script>
+      const data = [
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "듀오",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "작업완료", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "작업완료", service: "듀오",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "작업완료", service: "강의",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "진행중", service: "대리",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 506, status: "작업완료", service: "강의",
+          title: "3월 21일 | 336건 작업중 | 미드 대리랭크 | 마스터 티어",
+          author: "미코팀", date: "2025-03-21", views: 17,
+          image: "img/일반.webp"
+        },
+        {
+          id: 505, status: "작업완료", service: "듀오",
+          title: "3월 20일 | 350건 완료 | 듀오 정글 | 챌린저 티어",
+          author: "미코팀", date: "2025-03-20", views: 12,
+          image: "img/일반.webp"
+        }
+      ];
+
+      let isAdmin = false;
+      let currentPage = 1;
+      const itemsPerPage = 10;
+
+
+
+      function renderTable() {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const serviceFilter = document.getElementById('serviceFilter').value;
+        const search = document.getElementById('searchInput').value.toLowerCase();
+
+        let filtered = data.filter(item => {
+          return (
+            (statusFilter === "전체" || item.status === statusFilter) &&
+            (serviceFilter === "전체" || item.service === serviceFilter) &&
+            item.title.toLowerCase().includes(search)
+          );
+        });
+
+        const tbody = document.getElementById('progressBody');
+        tbody.innerHTML = '';
+
+        const start = (currentPage - 1) * itemsPerPage;
+        const paginated = filtered.slice(start, start + itemsPerPage);
+
+        paginated.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
         <td>${item.id}</td>
         <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
         <td>${item.service}</td>
@@ -443,322 +450,360 @@ top: 50%;
         <td>${item.views}</td>
         <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
       `;
-      tbody.appendChild(tr);
-    });
+          tbody.appendChild(tr);
+        });
 
-    renderPagination(filtered.length);
-  }
-
-  function renderPagination(totalItems) {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '‹ 이전';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable();
+        renderPagination(filtered.length);
       }
-    };
-    pagination.appendChild(prevBtn);
 
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add('active');
-      btn.onclick = () => {
-        currentPage = i;
-        renderTable();
+      function renderPagination(totalItems) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '‹ 이전';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+          }
+        };
+        pagination.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = i;
+          if (i === currentPage) btn.classList.add('active');
+          btn.onclick = () => {
+            currentPage = i;
+            renderTable();
+          };
+          pagination.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = '다음 ›';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+          }
+        };
+        pagination.appendChild(nextBtn);
+      }
+
+      document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('title-clickable')) {
+          e.preventDefault();
+          const imgSrc = e.target.getAttribute('data-image');
+          const modal = document.getElementById('imageModal');
+          const modalImg = document.getElementById('modalImage');
+          modalImg.src = imgSrc;
+          modal.style.display = "block";
+        }
+      });
+
+      document.getElementById('closeModal').addEventListener('click', function () {
+        document.getElementById('imageModal').style.display = "none";
+      });
+
+      window.addEventListener('click', function (e) {
+        const modal = document.getElementById('imageModal');
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // ✅ 관리자 버튼 이벤트 연결
+      document.getElementById('progressBody').addEventListener('click', function (e) {
+        if (e.target.classList.contains('btn-edit')) {
+          alert('수정 기능은 아직 구현되지 않았습니다.');
+        }
+
+        if (e.target.classList.contains('btn-delete')) {
+          const row = e.target.closest('tr');
+          const id = parseInt(row.children[0].textContent);
+
+          if (confirm('삭제하시겠습니까?')) {
+            const index = data.findIndex(item => item.id === id);
+            if (index !== -1) {
+              data.splice(index, 1);
+              renderTable();
+            }
+          }
+        }
+      });
+
+      window.onload = () => {
+
       };
-      pagination.appendChild(btn);
-    }
 
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '다음 ›';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderTable();
+      function openModal(src) {
+        const modal = document.getElementById('imageModal');
+        const img = document.getElementById('modalImage');
+        img.src = src;
+        modal.style.display = 'flex';
       }
-    };
-    pagination.appendChild(nextBtn);
-  }
 
-  document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('title-clickable')) {
-      e.preventDefault();
-      const imgSrc = e.target.getAttribute('data-image');
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      modalImg.src = imgSrc;
-      modal.style.display = "block";
-    }
-  });
+      function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+      }
 
-  document.getElementById('closeModal').addEventListener('click', function () {
-    document.getElementById('imageModal').style.display = "none";
-  });
 
-  window.addEventListener('click', function (e) {
-    const modal = document.getElementById('imageModal');
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
+    </script>
+    <footer class="happyteam-footer">
+      <div class="footer-content">
+        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+        <div class="footer-links">
+          <a href="#">서비스 이용약관</a> |
+          <a href="#">개인정보 처리방침</a> |
+          <a href="#">문의하기</a>
+        </div>
+        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+      </div>
+    </footer>
 
-  // ✅ 관리자 버튼 이벤트 연결
-  document.getElementById('progressBody').addEventListener('click', function(e) {
-    if (e.target.classList.contains('btn-edit')) {
-      alert('수정 기능은 아직 구현되지 않았습니다.');
-    }
-
-    if (e.target.classList.contains('btn-delete')) {
-      const row = e.target.closest('tr');
-      const id = parseInt(row.children[0].textContent);
-
-      if (confirm('삭제하시겠습니까?')) {
-        const index = data.findIndex(item => item.id === id);
-        if (index !== -1) {
-          data.splice(index, 1);
-          renderTable();
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        addDoc,
+        deleteDoc,
+        doc,
+        updateDoc
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        onAuthStateChanged,
+        signOut
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+    
+      const firebaseConfig = {
+        apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
+        authDomain: "mico-test-3b006.firebaseapp.com",
+        projectId: "mico-test-3b006",
+        storageBucket: "mico-test-3b006.appspot.com",
+        messagingSenderId: "282703834529",
+        appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
+      };
+    
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+      const colRef = collection(db, "progress");
+    
+      let isAdmin = false;
+      let progressData = [];
+      let currentPage = 1;
+      const itemsPerPage = 10;
+    
+      function updateLoginUI() {
+        const loginBtn = document.querySelector('#loginArea button[onclick="login()"]');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const emailInput = document.getElementById('adminEmail');
+        const pwInput = document.getElementById('adminPassword');
+    
+        if (isAdmin) {
+          loginBtn.style.display = 'none';
+          logoutBtn.style.display = 'inline-block';
+          emailInput.style.display = 'none';
+          pwInput.style.display = 'none';
+        } else {
+          loginBtn.style.display = 'inline-block';
+          logoutBtn.style.display = 'none';
+          emailInput.style.display = 'inline-block';
+          pwInput.style.display = 'inline-block';
         }
       }
-    }
-  });
-
-  window.onload = () => {
-    renderTable();
-  };
-
-    function openModal(src) {
-  const modal = document.getElementById('imageModal');
-  const img = document.getElementById('modalImage');
-  img.src = src;
-  modal.style.display = 'flex';
-}
-
-function closeModal() {
-  document.getElementById('imageModal').style.display = 'none';
-}
-
-
-  </script>
- <footer class="happyteam-footer">
-  <div class="footer-content">
-      <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
-      <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
-      <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
-      <div class="footer-links">
-          <a href="#">서비스 이용약관</a> | 
-          <a href="#">개인정보 처리방침</a> | 
-          <a href="#">문의하기</a>
-      </div>
-      <p class="copyright">© 2024 MICO. All rights reserved.</p>
-  </div>
-</footer>
-  
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    getDocs,
-    addDoc,
-    deleteDoc,
-    doc,
-    updateDoc
-  } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
-    authDomain: "mico-test-3b006.firebaseapp.com",
-    projectId: "mico-test-3b006",
-    storageBucket: "mico-test-3b006.appspot.com",
-    messagingSenderId: "282703834529",
-    appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const colRef = collection(db, "progress");
-
-  // ✅ 테스트 데이터 자동 추가 (한 번만 실행 후 주석 처리하거나 제거해도 됨)
-  const sampleData = Array.from({ length: 10 }).map((_, i) => ({
-    id: 1000 + i,
-    status: i % 2 === 0 ? "진행중" : "작업완료",
-    service: ["강의", "듀오", "대리"][i % 3],
-    title: `테스트 작업 ${i + 1}번`,
-    author: "미코팀",
-    date: "2025-03-25",
-    views: Math.floor(Math.random() * 50),
-    image: "img/일반.webp"
-  }));
-
-  // 주석 해제 시 한 번 실행됨
-  /*
-  sampleData.forEach(async (item) => {
-    await addDoc(colRef, item);
-    console.log(`추가 완료: ${item.title}`);
-  });
-  */
-
-  let isAdmin = false;
-  let progressData = [];
-  let currentPage = 1;
-  const itemsPerPage = 10;
-
-  async function fetchProgressData() {
-    const snapshot = await getDocs(colRef);
-    progressData = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
-    renderTable();
-  }
-
-  document.getElementById('progressBody').addEventListener('click', async function(e) {
-    if (e.target.classList.contains('btn-delete')) {
-      const row = e.target.closest('tr');
-      const fid = row.dataset.fid;
-
-      if (confirm('삭제하시겠습니까?')) {
-        await deleteDoc(doc(db, "progress", fid));
-        fetchProgressData();
-      }
-    }
-
-    if (e.target.classList.contains('btn-edit')) {
-      const row = e.target.closest('tr');
-      const fid = row.dataset.fid;
-      const titleCell = row.querySelector('.title');
-      const newTitle = prompt("새 제목을 입력하세요:", titleCell.textContent);
-      if (newTitle) {
-        await updateDoc(doc(db, "progress", fid), { title: newTitle });
-        fetchProgressData();
-      }
-    }
-  });
-
-  document.getElementById('adminPassword').addEventListener('keypress', e => {
-    if (e.key === 'Enter') login();
-  });
-
-  window.login = function () {
-    const pw = document.getElementById('adminPassword').value;
-    if (pw === '1234') {
-      isAdmin = true;
-      alert("관리자 로그인 성공!");
-      renderTable();
-    } else {
-      alert("비밀번호가 틀렸습니다.");
-    }
-  }
-
-  window.renderTable = function () {
-    const statusFilter = document.getElementById('statusFilter').value;
-    const serviceFilter = document.getElementById('serviceFilter').value;
-    const search = document.getElementById('searchInput').value.toLowerCase();
-
-    let filtered = progressData.filter(item => {
-      return (
-        (statusFilter === "전체" || item.status === statusFilter) &&
-        (serviceFilter === "전체" || item.service === serviceFilter) &&
-        item.title.toLowerCase().includes(search)
-      );
-    });
-
-    const tbody = document.getElementById('progressBody');
-    tbody.innerHTML = '';
-
-    const start = (currentPage - 1) * itemsPerPage;
-    const paginated = filtered.slice(start, start + itemsPerPage);
-
-    paginated.forEach((item, idx) => {
-  const tr = document.createElement('tr');
-  tr.dataset.fid = item.fid;
-  tr.innerHTML = `
-    <td>${(currentPage - 1) * itemsPerPage + idx + 1}</td>
-    <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
-    <td>${item.service}</td>
-    <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
-    <td>${item.author}</td>
-    <td>${item.date}</td>
-    <td>${item.views}</td>
-    <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
-  `;
-  tbody.appendChild(tr);
-});
-
-    renderPagination(filtered.length);
-  }
-
-  window.renderPagination = function (totalItems) {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '‹ 이전';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable();
-      }
-    };
-    pagination.appendChild(prevBtn);
-
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add('active');
-      btn.onclick = () => {
-        currentPage = i;
-        renderTable();
+    
+      window.login = async function () {
+        const email = document.getElementById('adminEmail').value;
+        const pw = document.getElementById('adminPassword').value;
+    
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, pw);
+          const token = await userCredential.user.getIdTokenResult();
+    
+          if (token.claims.admin) {
+            isAdmin = true;
+            alert("✅ 관리자 로그인 성공!");
+          } else {
+            isAdmin = false;
+            alert("🚫 관리자 권한이 없습니다.");
+          }
+    
+          updateLoginUI();
+          renderTable();
+        } catch (err) {
+          alert("로그인 실패: " + err.message);
+        }
       };
-      pagination.appendChild(btn);
-    }
-
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '다음 ›';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => {
-      if (currentPage < totalPages) {
-        currentPage++;
+    
+      window.logout = async function () {
+        try {
+          await signOut(auth);
+          isAdmin = false;
+          alert("👋 로그아웃 되었습니다.");
+          updateLoginUI();
+          renderTable();
+        } catch (err) {
+          alert("로그아웃 실패: " + err.message);
+        }
+      };
+    
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          await user.getIdToken(true);
+          const token = await user.getIdTokenResult();
+          isAdmin = !!token.claims.admin;
+        } else {
+          isAdmin = false;
+        }
+        updateLoginUI();
+        fetchProgressData();
+      });
+    
+      async function fetchProgressData() {
+        const snapshot = await getDocs(colRef);
+        progressData = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
         renderTable();
       }
-    };
-    pagination.appendChild(nextBtn);
-  }
+    
+      document.getElementById('progressBody').addEventListener('click', async function (e) {
+        const row = e.target.closest('tr');
+        const fid = row?.dataset.fid;
+    
+        if (e.target.classList.contains('btn-delete')) {
+          if (confirm('삭제하시겠습니까?')) {
+            await deleteDoc(doc(db, "progress", fid));
+            fetchProgressData();
+          }
+        }
+    
+        if (e.target.classList.contains('btn-edit')) {
+          const titleCell = row.querySelector('.title');
+          const newTitle = prompt("새 제목을 입력하세요:", titleCell.textContent);
+          if (newTitle) {
+            await updateDoc(doc(db, "progress", fid), { title: newTitle });
+            fetchProgressData();
+          }
+        }
+      });
+    
+      window.renderTable = function () {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const serviceFilter = document.getElementById('serviceFilter').value;
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        const tbody = document.getElementById('progressBody');
+    
+        const filtered = progressData.filter(item => {
+          return (
+            (statusFilter === "전체" || item.status === statusFilter) &&
+            (serviceFilter === "전체" || item.service === serviceFilter) &&
+            item.title.toLowerCase().includes(search)
+          );
+        });
+    
+        tbody.innerHTML = '';
+        const start = (currentPage - 1) * itemsPerPage;
+        const paginated = filtered.slice(start, start + itemsPerPage);
+    
+        paginated.forEach((item, idx) => {
+          const tr = document.createElement('tr');
+          tr.dataset.fid = item.fid;
+          tr.innerHTML = `
+            <td>${(currentPage - 1) * itemsPerPage + idx + 1}</td>
+            <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
+            <td>${item.service}</td>
+            <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
+            <td>${item.author}</td>
+            <td>${item.date}</td>
+            <td>${item.views}</td>
+            <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+    
+        renderPagination(filtered.length);
+      };
+    
+      window.renderPagination = function (totalItems) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+    
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '‹ 이전';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+          }
+        };
+        pagination.appendChild(prevBtn);
+    
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = i;
+          if (i === currentPage) btn.classList.add('active');
+          btn.onclick = () => {
+            currentPage = i;
+            renderTable();
+          };
+          pagination.appendChild(btn);
+        }
+    
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = '다음 ›';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+          }
+        };
+        pagination.appendChild(nextBtn);
+      };
+    
+      // 상세 이미지 모달
+      document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('title-clickable')) {
+          e.preventDefault();
+          const imgSrc = e.target.getAttribute('data-image');
+          const modal = document.getElementById('imageModal');
+          const modalImg = document.getElementById('modalImage');
+          modalImg.src = imgSrc;
+          modal.style.display = "block";
+        }
+      });
+    
+      document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('imageModal').style.display = "none";
+      });
+    
+      window.addEventListener('click', function (e) {
+        const modal = document.getElementById('imageModal');
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    
+      window.onload = () => {
+        fetchProgressData();
+      };
+    </script>
+    
 
-  document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('title-clickable')) {
-      e.preventDefault();
-      const imgSrc = e.target.getAttribute('data-image');
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      modalImg.src = imgSrc;
-      modal.style.display = "block";
-    }
-  });
 
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('imageModal').style.display = "none";
-  });
+  </body>
 
-  window.addEventListener('click', function (e) {
-    const modal = document.getElementById('imageModal');
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  window.onload = () => {
-    fetchProgressData();
-  }
-</script>
-
-
-</body>
 </html>
