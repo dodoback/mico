@@ -43,16 +43,23 @@
       </ul>
     </nav>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggle = document.querySelector('.dropdown-toggle');
-        const menu = document.querySelector('.dropdown-menu');
-
-        toggle.addEventListener('click', (e) => {
+      document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const dropdown = dropdownToggle?.closest('.dropdown');
+    
+        dropdownToggle?.addEventListener('click', function (e) {
           e.preventDefault();
-          menu.classList.toggle('open');
+          dropdown?.classList.toggle('open');
+        });
+    
+        document.addEventListener('click', function (e) {
+          if (dropdown && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+          }
         });
       });
     </script>
+    
     <a href="#" class="contact-btn">
       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
     </a>
