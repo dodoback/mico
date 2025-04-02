@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>미코팀 | 공지사항</title>
+  <meta name="description" content="미코팀의 공지사항 및 서비스 관련 업데이트 정보를 확인하세요.">
+  <meta name="keywords" content="미코팀 공지사항, 롤 대리 공지, 서비스 변경 안내, 패치노트, 운영 정보">
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
 </head>
@@ -58,7 +61,6 @@
 
 
   <style>
-
     .patch-notes h2 {
       margin: 40px auto 20px auto;
       color: #fff;
@@ -179,7 +181,7 @@
 
 
 
-    
+
     .patch-notes h2 {
       margin: 40px auto 20px auto;
       /* 위쪽 마진을 늘려 제목을 더 아래로 내립니다 */
@@ -203,22 +205,27 @@
 
     /* 카드 스타일 */
     .card {
-  height: auto; /* or 생략 */
-  min-height: 300px;  /* 기존보다 약간 크게 설정 */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* 이미지 기준 정렬 */
-}
+      height: auto;
+      /* or 생략 */
+      min-height: 300px;
+      /* 기존보다 약간 크게 설정 */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      /* 이미지 기준 정렬 */
+    }
 
 
-.card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5; /* 이미지 비율이 세로형일 경우 */
-  object-fit: contain;
-  border-radius: 8px;
-  background-color: #000; /* 빈 공간을 자연스럽게 처리 */
-}
+    .card img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      /* 이미지 비율이 세로형일 경우 */
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #000;
+      /* 빈 공간을 자연스럽게 처리 */
+    }
 
 
     .card-title {
@@ -303,205 +310,204 @@
       padding-top: 1px;
       padding-bottom: 30px;
     }
-    
   </style>
 
 
-<main>
-  <section class="patch-notes">
-    <h2>리그 오브 레전드 패치노트 요약</h2>
-    <div class="cards-container"></div>
+  <main>
+    <section class="patch-notes">
+      <h2>리그 오브 레전드 패치노트 요약</h2>
+      <div class="cards-container"></div>
 
-    <div class="pagination" id="pagination"></div>
+      <div class="pagination" id="pagination"></div>
 
-  </section>
+    </section>
 
-  <div class="modal" id="detailModal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h3 id="modalTitle">패치 상세보기</h3>
-      <div id="modalContent">내용을 로드 중입니다...</div>
+    <div class="modal" id="detailModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3 id="modalTitle">패치 상세보기</h3>
+        <div id="modalContent">내용을 로드 중입니다...</div>
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<!-- ✅ JS 전체 렌더링 영역 (script 내부) -->
-<script>
-  let currentPage = 1;
-  const itemsPerPage = 9;
-  const patchData = [
-  {
-    title: '14.6 패치 노트',
-    content: '아리 프레스티지 출시, 일부 스킬 밸런스 조정',
-    image: '공지사항/Image 14.6.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-6-notes/'
-  },
-  {
-    title: '14.5 패치 노트',
-    content: '정글 및 미드 메타 조정, 신규 스킨 출시',
-    image: '공지사항/Image 14.5.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-5-notes/'
-  },
-  {
-    title: '14.4 패치 노트',
-    content: '신화급 아이템 추가, 티모 및 일부 챔피언 변경',
-    image: '공지사항/Image 14.4.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-4-notes/'
-  },
-  {
-    title: '14.3 패치 노트',
-    content: '챔피언 대규모 밸런스 조정 및 신규 스킨 출시',
-    image: '공지사항/Image 14.3.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-3-notes/'
-  },
-  {
-    title: '14.2 패치 노트',
-    content: '조이 신규 스킨 및 버그 수정',
-    image: '공지사항/Image 14.2.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-2-notes/'
-  },
-  {
-    title: '14.1B 패치 노트',
-    content: '시즌 시작 직전 챔피언 밸런스 핫픽스',
-    image: '공지사항/Image 14.1B.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1b-notes/'
-  },
-  {
-    title: '14.1 패치 노트',
-    content: '2025 시즌 랭크 초기화 및 아이템 리워크',
-    image: '공지사항/Image 14.1.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1-notes/'
-  },
-  {
-    title: '13.24 패치 노트',
-    content: '프리시즌 아이템 실험 및 밸런스 변경',
-    image: '공지사항/Image 13.24.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-24-notes/'
-  },
-  {
-    title: '13.23 패치 노트',
-    content: '챔피언 밸런스 조정 및 신규 콘텐츠 예고',
-    image: '공지사항/Image 13.23.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-23-notes/'
-  },
-  {
-    title: '13.22 패치 노트',
-    content: '이즈리얼 및 카이사 스킬 밸런스 수정',
-    image: '공지사항/Image 13.22.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-22-notes/'
-  },
-  {
-    title: '13.21 패치 노트',
-    content: '정글 변경 및 룬 조정, 신규 스킨 출시',
-    image: '공지사항/Image 13.21.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-21-notes/'
-  },
-  {
-    title: '13.20 패치 노트',
-    content: '게임 템포 개선, 일부 챔피언 리워크 적용',
-    image: '공지사항/Image 13.20.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-20-notes/'
-  },
-  {
-    title: '13.19 패치 노트',
-    content: '월즈 챔피언십 메타 패치',
-    image: '공지사항/Image 13.19.png',
-    link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-19-notes/'
-  }
-];
-
+  <!-- ✅ JS 전체 렌더링 영역 (script 내부) -->
+  <script>
+    let currentPage = 1;
+    const itemsPerPage = 9;
+    const patchData = [
+      {
+        title: '14.6 패치 노트',
+        content: '아리 프레스티지 출시, 일부 스킬 밸런스 조정',
+        image: '공지사항/Image 14.6.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-6-notes/'
+      },
+      {
+        title: '14.5 패치 노트',
+        content: '정글 및 미드 메타 조정, 신규 스킨 출시',
+        image: '공지사항/Image 14.5.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-5-notes/'
+      },
+      {
+        title: '14.4 패치 노트',
+        content: '신화급 아이템 추가, 티모 및 일부 챔피언 변경',
+        image: '공지사항/Image 14.4.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-4-notes/'
+      },
+      {
+        title: '14.3 패치 노트',
+        content: '챔피언 대규모 밸런스 조정 및 신규 스킨 출시',
+        image: '공지사항/Image 14.3.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-3-notes/'
+      },
+      {
+        title: '14.2 패치 노트',
+        content: '조이 신규 스킨 및 버그 수정',
+        image: '공지사항/Image 14.2.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-2-notes/'
+      },
+      {
+        title: '14.1B 패치 노트',
+        content: '시즌 시작 직전 챔피언 밸런스 핫픽스',
+        image: '공지사항/Image 14.1B.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1b-notes/'
+      },
+      {
+        title: '14.1 패치 노트',
+        content: '2025 시즌 랭크 초기화 및 아이템 리워크',
+        image: '공지사항/Image 14.1.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-14-1-notes/'
+      },
+      {
+        title: '13.24 패치 노트',
+        content: '프리시즌 아이템 실험 및 밸런스 변경',
+        image: '공지사항/Image 13.24.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-24-notes/'
+      },
+      {
+        title: '13.23 패치 노트',
+        content: '챔피언 밸런스 조정 및 신규 콘텐츠 예고',
+        image: '공지사항/Image 13.23.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-23-notes/'
+      },
+      {
+        title: '13.22 패치 노트',
+        content: '이즈리얼 및 카이사 스킬 밸런스 수정',
+        image: '공지사항/Image 13.22.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-22-notes/'
+      },
+      {
+        title: '13.21 패치 노트',
+        content: '정글 변경 및 룬 조정, 신규 스킨 출시',
+        image: '공지사항/Image 13.21.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-21-notes/'
+      },
+      {
+        title: '13.20 패치 노트',
+        content: '게임 템포 개선, 일부 챔피언 리워크 적용',
+        image: '공지사항/Image 13.20.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-20-notes/'
+      },
+      {
+        title: '13.19 패치 노트',
+        content: '월즈 챔피언십 메타 패치',
+        image: '공지사항/Image 13.19.png',
+        link: 'https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-13-19-notes/'
+      }
+    ];
 
 
-  function renderCards() {
-    const cardsContainer = document.querySelector('.cards-container');
-    cardsContainer.innerHTML = '';  // 기존 카드 지우기
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, patchData.length);
+    function renderCards() {
+      const cardsContainer = document.querySelector('.cards-container');
+      cardsContainer.innerHTML = '';  // 기존 카드 지우기
 
-    for (let i = startIndex; i < endIndex; i++) {
-      const card = document.createElement('div');
-      card.classList.add('card');
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, patchData.length);
 
-      const cardContent = `
+      for (let i = startIndex; i < endIndex; i++) {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const cardContent = `
         <div class="card-title">${patchData[i].title}</div>
         <div class="card-content">${patchData[i].content}</div>
       `;
 
-      if (patchData[i].image) {
-        card.innerHTML = `<img src="img/${patchData[i].image}" alt="패치 이미지 ${i + 1}" />` + cardContent;
-      } else {
-        card.innerHTML = cardContent;
+        if (patchData[i].image) {
+          card.innerHTML = `<img src="img/${patchData[i].image}" alt="패치 이미지 ${i + 1}" />` + cardContent;
+        } else {
+          card.innerHTML = cardContent;
+        }
+
+        card.addEventListener('click', () => openModal(patchData[i].title, patchData[i].content, patchData[i].link));
+        cardsContainer.appendChild(card);
       }
 
-      card.addEventListener('click', () => openModal(patchData[i].title, patchData[i].content, patchData[i].link));
-      cardsContainer.appendChild(card);
+      renderPagination(patchData.length); // ✅ 페이지네이션 업데이트
     }
 
-    renderPagination(patchData.length); // ✅ 페이지네이션 업데이트
-  }
+    function renderPagination(totalItems) {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      pagination.innerHTML = '';
 
-  function renderPagination(totalItems) {
-    const pagination = document.getElementById('pagination');
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    pagination.innerHTML = '';
-
-    // 이전 버튼
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '‹ 이전';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderCards();
-      }
-    };
-    pagination.appendChild(prevBtn);
-
-    // 페이지 번호
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add('active');
-      btn.onclick = () => {
-        currentPage = i;
-        renderCards();
+      // 이전 버튼
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = '‹ 이전';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderCards();
+        }
       };
-      pagination.appendChild(btn);
-    }
+      pagination.appendChild(prevBtn);
 
-    // 다음 버튼
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '다음 ›';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderCards();
+      // 페이지 번호
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.onclick = () => {
+          currentPage = i;
+          renderCards();
+        };
+        pagination.appendChild(btn);
       }
-    };
-    pagination.appendChild(nextBtn);
-  }
 
-  function openModal(title, content, link) {
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalContent').innerHTML = `${content}<br><br><a href="${link}" target="_blank" style="color: #1abc9c;">자세히 보기</a>`;
-    document.getElementById('detailModal').style.display = 'flex';
-  }
-
-  document.querySelector('.close-btn').addEventListener('click', () => {
-    document.getElementById('detailModal').style.display = 'none';
-  });
-
-  document.getElementById('detailModal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('detailModal')) {
-      document.getElementById('detailModal').style.display = 'none';
+      // 다음 버튼
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = '다음 ›';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderCards();
+        }
+      };
+      pagination.appendChild(nextBtn);
     }
-  });
 
-  // ✅ 최초 렌더링
-  renderCards();
-</script>
+    function openModal(title, content, link) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalContent').innerHTML = `${content}<br><br><a href="${link}" target="_blank" style="color: #1abc9c;">자세히 보기</a>`;
+      document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    document.querySelector('.close-btn').addEventListener('click', () => {
+      document.getElementById('detailModal').style.display = 'none';
+    });
+
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('detailModal')) {
+        document.getElementById('detailModal').style.display = 'none';
+      }
+    });
+
+    // ✅ 최초 렌더링
+    renderCards();
+  </script>
 
 
 
@@ -521,7 +527,7 @@
       <p class="copyright">© 2024 MICO. All rights reserved.</p>
     </div>
   </footer>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const dropdownToggle = document.querySelector('.dropdown-toggle');
