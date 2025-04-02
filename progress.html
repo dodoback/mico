@@ -446,7 +446,7 @@
         let filtered = data.filter(item => {
           return (
             (statusFilter === "전체" || item.status === statusFilter) &&
-            (serviceFilter === "전체" || item.service === serviceFilter) &&
+            
             item.title.toLowerCase().includes(search)
           );
         });
@@ -462,7 +462,7 @@
           tr.innerHTML = `
         <td>${item.id}</td>
         <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
-        <td>${item.service}</td>
+        
         <td><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
         <td>${item.author}</td>
         <td>${item.date}</td>
@@ -717,7 +717,7 @@
         const filtered = progressData.filter(item => {
           return (
             (statusFilter === "전체" || item.status === statusFilter) &&
-            (serviceFilter === "전체" || item.service === serviceFilter) &&
+            
             item.title.toLowerCase().includes(search)
           );
         });
