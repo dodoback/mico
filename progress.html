@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>미코팀 | 작업현황</title>
   <meta name="description" content="현재 진행 중인 롤 대리 및 강의 작업을 실시간으로 확인하세요.">
-<meta name="keywords" content="롤 대리 현황, 작업현황, 미코팀 대리 상태, 실시간 롤 대리">
+  <meta name="keywords" content="롤 대리 현황, 작업현황, 미코팀 대리 상태, 실시간 롤 대리">
   <link rel="stylesheet" href="styles.css" />
 
 </head>
@@ -82,6 +82,24 @@
 
 
   <style>
+    /* 제목 텍스트 링크 색상 변경 (밝은 회색 추천) */
+    table a {
+      color: #90c3f9;
+      /* 눈에 편한 밝은 회색 */
+      text-decoration: none;
+      /* 밑줄 제거(선택사항) */
+    }
+
+    /* 마우스를 올렸을 때 밝아지는 효과 */
+    table a:hover {
+      color: #b9c5d1;
+      /* 흰색으로 변경 */
+    }
+
+
+
+
+
     .modal {
       display: none;
       position: fixed;
@@ -295,7 +313,7 @@
         <button onclick="login()" id="loginBtn">로그인</button>
         <button onclick="logout()" id="logoutBtn" style="display: none;">로그아웃</button>
       </div>
-      
+
 
 
       <div class="filters">
@@ -318,7 +336,6 @@
           <tr>
             <th>번호</th>
             <th>상태</th>
-            <th>서비스</th>
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
@@ -497,16 +514,7 @@
         pagination.appendChild(nextBtn);
       }
 
-      document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('title-clickable')) {
-          e.preventDefault();
-          const imgSrc = e.target.getAttribute('data-image');
-          const modal = document.getElementById('imageModal');
-          const modalImg = document.getElementById('modalImage');
-          modalImg.src = imgSrc;
-          modal.style.display = "block";
-        }
-      });
+
 
       document.getElementById('closeModal').addEventListener('click', function () {
         document.getElementById('imageModal').style.display = "none";
@@ -587,7 +595,7 @@
         onAuthStateChanged,
         signOut
       } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
-    
+
       const firebaseConfig = {
         apiKey: "AIzaSyBKrorhUNyv8q_Bekg5DJnkZgCW9kFfjjI",
         authDomain: "mico-test-3b006.firebaseapp.com",
@@ -596,23 +604,23 @@
         messagingSenderId: "282703834529",
         appId: "1:282703834529:web:31a65b83e1a351a3ba2fe0"
       };
-    
+
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       const auth = getAuth(app);
       const colRef = collection(db, "progress");
-    
+
       let isAdmin = false;
       let progressData = [];
       let currentPage = 1;
       const itemsPerPage = 10;
-    
+
       function updateLoginUI() {
         const loginBtn = document.querySelector('#loginArea button[onclick="login()"]');
         const logoutBtn = document.getElementById('logoutBtn');
         const emailInput = document.getElementById('adminEmail');
         const pwInput = document.getElementById('adminPassword');
-    
+
         if (isAdmin) {
           loginBtn.style.display = 'none';
           logoutBtn.style.display = 'inline-block';
@@ -625,15 +633,15 @@
           pwInput.style.display = 'inline-block';
         }
       }
-    
+
       window.login = async function () {
         const email = document.getElementById('adminEmail').value;
         const pw = document.getElementById('adminPassword').value;
-    
+
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, pw);
           const token = await userCredential.user.getIdTokenResult();
-    
+
           if (token.claims.admin) {
             isAdmin = true;
             alert("✅ 관리자 로그인 성공!");
@@ -641,14 +649,14 @@
             isAdmin = false;
             alert("🚫 관리자 권한이 없습니다.");
           }
-    
+
           updateLoginUI();
           renderTable();
         } catch (err) {
           alert("로그인 실패: " + err.message);
         }
       };
-    
+
       window.logout = async function () {
         try {
           await signOut(auth);
@@ -660,7 +668,7 @@
           alert("로그아웃 실패: " + err.message);
         }
       };
-    
+
       onAuthStateChanged(auth, async (user) => {
         if (user) {
           await user.getIdToken(true);
@@ -672,24 +680,24 @@
         updateLoginUI();
         fetchProgressData();
       });
-    
+
       async function fetchProgressData() {
         const snapshot = await getDocs(colRef);
         progressData = snapshot.docs.map(doc => ({ fid: doc.id, ...doc.data() }));
         renderTable();
       }
-    
+
       document.getElementById('progressBody').addEventListener('click', async function (e) {
         const row = e.target.closest('tr');
         const fid = row?.dataset.fid;
-    
+
         if (e.target.classList.contains('btn-delete')) {
           if (confirm('삭제하시겠습니까?')) {
             await deleteDoc(doc(db, "progress", fid));
             fetchProgressData();
           }
         }
-    
+
         if (e.target.classList.contains('btn-edit')) {
           const titleCell = row.querySelector('.title');
           const newTitle = prompt("새 제목을 입력하세요:", titleCell.textContent);
@@ -699,13 +707,13 @@
           }
         }
       });
-    
+
       window.renderTable = function () {
         const statusFilter = document.getElementById('statusFilter').value;
         const serviceFilter = document.getElementById('serviceFilter').value;
         const search = document.getElementById('searchInput').value.toLowerCase();
         const tbody = document.getElementById('progressBody');
-    
+
         const filtered = progressData.filter(item => {
           return (
             (statusFilter === "전체" || item.status === statusFilter) &&
@@ -713,35 +721,35 @@
             item.title.toLowerCase().includes(search)
           );
         });
-    
+
         tbody.innerHTML = '';
         const start = (currentPage - 1) * itemsPerPage;
         const paginated = filtered.slice(start, start + itemsPerPage);
-    
+
         paginated.forEach((item, idx) => {
           const tr = document.createElement('tr');
           tr.dataset.fid = item.fid;
           tr.innerHTML = `
-            <td>${(currentPage - 1) * itemsPerPage + idx + 1}</td>
-            <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
-            <td>${item.service}</td>
-            <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
-            <td>${item.author}</td>
-            <td>${item.date}</td>
-            <td>${item.views}</td>
-            <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
-          `;
+  <td>${(currentPage - 1) * itemsPerPage + idx + 1}</td>
+  <td><span class="badge ${item.status === '진행중' ? 'badge-progress' : 'badge-done'}">${item.status}</span></td>
+  <td class="title"><a href="#" class="title-clickable" data-image="${item.image}">${item.title}</a></td>
+  <td>${item.author}</td>
+  <td>${item.date}</td>
+  <td>${item.views}</td>
+  <td>${isAdmin ? `<button class="btn btn-edit">수정</button><button class="btn btn-delete">삭제</button>` : ''}</td>
+`;
+
           tbody.appendChild(tr);
         });
-    
+
         renderPagination(filtered.length);
       };
-    
+
       window.renderPagination = function (totalItems) {
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         const pagination = document.getElementById('pagination');
         pagination.innerHTML = '';
-    
+
         const prevBtn = document.createElement('button');
         prevBtn.textContent = '‹ 이전';
         prevBtn.disabled = currentPage === 1;
@@ -752,7 +760,7 @@
           }
         };
         pagination.appendChild(prevBtn);
-    
+
         for (let i = 1; i <= totalPages; i++) {
           const btn = document.createElement('button');
           btn.textContent = i;
@@ -763,7 +771,7 @@
           };
           pagination.appendChild(btn);
         }
-    
+
         const nextBtn = document.createElement('button');
         nextBtn.textContent = '다음 ›';
         nextBtn.disabled = currentPage === totalPages;
@@ -775,35 +783,25 @@
         };
         pagination.appendChild(nextBtn);
       };
-    
-      // 상세 이미지 모달
-      document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('title-clickable')) {
-          e.preventDefault();
-          const imgSrc = e.target.getAttribute('data-image');
-          const modal = document.getElementById('imageModal');
-          const modalImg = document.getElementById('modalImage');
-          modalImg.src = imgSrc;
-          modal.style.display = "block";
-        }
-      });
-    
+
+
+
       document.getElementById('closeModal').addEventListener('click', () => {
         document.getElementById('imageModal').style.display = "none";
       });
-    
+
       window.addEventListener('click', function (e) {
         const modal = document.getElementById('imageModal');
         if (e.target === modal) {
           modal.style.display = "none";
         }
       });
-    
+
       window.onload = () => {
         fetchProgressData();
       };
     </script>
-    
+
 
 
   </body>
