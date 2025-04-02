@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미코팀 | 롤 대리 · 롤 듀오 · 롤 강의 전문 팀 | 최강 실력과 신뢰의 No.1</title>
-    <meta name="description" content="롤 대리부터 강의, 듀오까지! 미코팀은 믿을 수 있는 롤 전문 대리팀입니다. 빠르고 안전하게 챔피언을 향해 도전하세요.">
-<meta name="keywords" content="롤 대리, 미코팀, 롤 듀오, 리그오브레전드 대리, 롤 강의, 롤대리팀">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미코팀 | 롤 대리 · 롤 듀오 · 롤 강의 전문 팀 | 최강 실력과 신뢰의 No.1</title>
+  <meta name="description" content="롤 대리부터 강의, 듀오까지! 미코팀은 믿을 수 있는 롤 전문 대리팀입니다. 빠르고 안전하게 챔피언을 향해 도전하세요.">
+  <meta name="keywords" content="롤 대리, 미코팀, 롤 듀오, 리그오브레전드 대리, 롤 강의, 롤대리팀">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
+
 <body>
-<header class="site-header">
+  <header class="site-header">
     <a href="index.html" class="logo">미코팀<span></span></a>
-  
+
     <!-- 햄버거 버튼 -->
     <input type="checkbox" id="menu-toggle" />
     <label for="menu-toggle" class="hamburger">
@@ -20,12 +23,12 @@
       <span></span>
       <span></span>
     </label>
-  
+
     <!-- 네비게이션 -->
     <nav>
       <ul class="nav-links">
         <li><a href="lineup.html">기사 라인업</a></li>
-  
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" id="price-toggle">가격표</a>
           <ul class="dropdown-menu">
@@ -37,18 +40,18 @@
             <li><a href="price-consulting.html">기타서비스</a></li>
           </ul>
         </li>
-  
+
         <li><a href="certification.html">작업인증</a></li>
         <li><a href="progress.html">작업현황</a></li>
         <li><a href="reviews.html">고객후기</a></li>
         <li><a href="notice.html">공지사항</a></li>
       </ul>
     </nav>
-  
+
     <a href="https://open.kakao.com/o/s4PrQ2oh" class="contact-btn" target="_blank" rel="noopener noreferrer">
       <img src="img/icons8-카카오-톡-48.png" alt=""> 카톡상담
     </a>
-    
+
 
   </header>
   <script>
@@ -56,19 +59,19 @@
       const priceToggle = document.getElementById("price-toggle");
       const dropdown = priceToggle.closest(".dropdown");
       const dropdownMenu = dropdown.querySelector(".dropdown-menu");
-    
+
       // 드롭다운 메뉴 클릭 시 toggle
       priceToggle.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation(); // 드롭다운 내부 클릭 전파 방지
         dropdown.classList.toggle("active");
       });
-    
+
       // 드롭다운 메뉴 내부 클릭 시 전파 방지
       dropdownMenu.addEventListener("click", function (e) {
         e.stopPropagation(); // 메뉴 내부 클릭 시 닫힘 방지
       });
-    
+
       // 드롭다운 바깥 클릭 시 닫힘
       document.addEventListener("click", function (e) {
         if (!dropdown.contains(e.target)) {
@@ -76,16 +79,16 @@
         }
       });
     });
-    </script>
-  
+  </script>
+
   <style>
     .dropdown-menu.open {
       display: block !important;
     }
   </style>
-  
-<!-- Swiper 슬라이드 섹션 -->
-<section class="main-banner">
+
+  <!-- Swiper 슬라이드 섹션 -->
+  <section class="main-banner">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <!-- 슬라이드 1 -->
@@ -116,7 +119,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- 네비게이션 & 도트 -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
@@ -124,273 +127,274 @@
     </div>
   </section>
 
-<section class="happyteam-services">
+  <section class="happyteam-services">
     <h2>미코팀 서비스</h2>
     <p>승리를 위한 최고의 선택! 미코팀과 함께하세요.</p>
 
     <div class="service-container">
-        <div class="service-card">
-            <div class="service-icon">👑</div>
-            <h3>승급대행</h3>
-            <p>최고의 실력자들과 함께 빠르고 안전하게 티어를 올려보세요.</p>
-        </div>
+      <div class="service-card">
+        <div class="service-icon">👑</div>
+        <h3>승급대행</h3>
+        <p>최고의 실력자들과 함께 빠르고 안전하게 티어를 올려보세요.</p>
+      </div>
 
-        <div class="service-card">
-            <div class="service-icon">🎮</div>
-            <h3>듀오 랭크</h3>
-            <p>게임은 혼자 하는 게 아니죠! 듀오 플레이로 더 재미있게.</p>
-        </div>
+      <div class="service-card">
+        <div class="service-icon">🎮</div>
+        <h3>듀오 랭크</h3>
+        <p>게임은 혼자 하는 게 아니죠! 듀오 플레이로 더 재미있게.</p>
+      </div>
 
-        <div class="service-card">
-            <div class="service-icon">📜</div>
-            <h3>배치 고사</h3>
-            <p>배치는 시즌의 시작입니다. 가장 좋은 결과를 위한 최선의 선택.</p>
-        </div>
+      <div class="service-card">
+        <div class="service-icon">📜</div>
+        <h3>배치 고사</h3>
+        <p>배치는 시즌의 시작입니다. 가장 좋은 결과를 위한 최선의 선택.</p>
+      </div>
 
-        <div class="service-card">
-            <div class="service-icon">🧑‍🏫</div>
-            <h3>1:1 코칭</h3>
-            <p>프로 강사와 함께하는 맞춤형 1:1 강의, 실력을 한 단계 더 높이세요.</p>
-        </div>
+      <div class="service-card">
+        <div class="service-icon">🧑‍🏫</div>
+        <h3>1:1 코칭</h3>
+        <p>프로 강사와 함께하는 맞춤형 1:1 강의, 실력을 한 단계 더 높이세요.</p>
+      </div>
     </div>
 
-   
-  
-</section>
 
-  
 
-<section class="happyteam-reviews">
+  </section>
+
+
+
+  <section class="happyteam-reviews">
     <div class="reviews-left">
-        <h2>고객 후기</h2>
-        <p>실제 이용자들의 생생한 후기를 만나보세요.</p>
-        <a href="#" class="btn-review">더 많은 후기 보기</a>
+      <h2>고객 후기</h2>
+      <p>실제 이용자들의 생생한 후기를 만나보세요.</p>
+      <a href="#" class="btn-review">더 많은 후기 보기</a>
     </div>
 
     <div class="reviews-right">
-        <div class="review-card">
-            <p>💬 "처음엔 반신반의했는데, 실력이 너무 좋으시네요! 강력 추천합니다."</p>
-            <span>- 유저123 | 2025.03.20</span>
-        </div>
-        <div class="review-card">
-            <p>💬 "빠르고 친절한 서비스! 듀오 진행했는데 재미까지 보장되네요."</p>
-            <span>- 프로게이머 | 2025.03.18</span>
-        </div>
-        <div class="review-card">
-            <p>💬 "롤토체스 강의 받았는데 완전 꿀팁 대방출! 이제는 챌린저 목표로 갑니다."</p>
-            <span>- TFT매니아 | 2025.03.17</span>
-        </div>
+      <div class="review-card">
+        <p>💬 "처음엔 반신반의했는데, 실력이 너무 좋으시네요! 강력 추천합니다."</p>
+        <span>- 유저123 | 2025.03.20</span>
+      </div>
+      <div class="review-card">
+        <p>💬 "빠르고 친절한 서비스! 듀오 진행했는데 재미까지 보장되네요."</p>
+        <span>- 프로게이머 | 2025.03.18</span>
+      </div>
+      <div class="review-card">
+        <p>💬 "롤토체스 강의 받았는데 완전 꿀팁 대방출! 이제는 챌린저 목표로 갑니다."</p>
+        <span>- TFT매니아 | 2025.03.17</span>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="happyteam-benefits">
+  <section class="happyteam-benefits">
     <h2>미코팀 혜택</h2>
 
     <div class="benefits-container">
-        <div class="benefit-item">
-            <div class="benefit-icon">🎯</div>
-            <h3>라인 & 챔피언 지정</h3>
-            <p><span>무료 제공</span> 원하는 포지션과 챔피언 선택 가능!</p>
-        </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🎯</div>
+        <h3>라인 & 챔피언 지정</h3>
+        <p><span>무료 제공</span> 원하는 포지션과 챔피언 선택 가능!</p>
+      </div>
 
-        <div class="benefit-item">
-            <div class="benefit-icon">⏳</div>
-            <h3>365일 24시간</h3>
-            <p><span>연중무휴</span> 언제든지 상담 및 작업 가능!</p>
-        </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">⏳</div>
+        <h3>365일 24시간</h3>
+        <p><span>연중무휴</span> 언제든지 상담 및 작업 가능!</p>
+      </div>
 
-        <div class="benefit-item">
-            <div class="benefit-icon">💰</div>
-            <h3>포토 후기 작성</h3>
-            <p><span>최대 10% 할인</span> 후기 남기고 할인받자!</p>
-        </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">💰</div>
+        <h3>포토 후기 작성</h3>
+        <p><span>최대 10% 할인</span> 후기 남기고 할인받자!</p>
+      </div>
 
-        <div class="benefit-item">
-            <div class="benefit-icon">🔒</div>
-            <h3>안전한 계정 보호</h3>
-            <p><span>비밀 유지</span> 철저한 보안으로 안심하세요.</p>
-        </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🔒</div>
+        <h3>안전한 계정 보호</h3>
+        <p><span>비밀 유지</span> 철저한 보안으로 안심하세요.</p>
+      </div>
 
-        <div class="benefit-item">
-            <div class="benefit-icon">✅</div>
-            <h3>100% 환불 보장</h3>
-            <p><span>불만족 시</span> 전액 환불 가능!</p>
-        </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">✅</div>
+        <h3>100% 환불 보장</h3>
+        <p><span>불만족 시</span> 전액 환불 가능!</p>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="happyteam-faq">
+  <section class="happyteam-faq">
     <h2>자주 묻는 질문 (FAQ)</h2>
     <p>궁금한 점이 있으신가요? 미코팀에서 자주 묻는 질문을 확인하세요!</p>
 
     <div class="faq-container">
-        <div class="faq-item">
-           
+      <div class="faq-item">
+
 
         <div class="faq-item">
-            <button class="faq-question">💰 환불 정책은 어떻게 되나요?</button>
-            <div class="faq-answer">
-                <p>작업이 시작되기 전에는 100% 환불이 가능하며, 진행 중에는 일부 환불이 가능합니다.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">⚡ 승률 보장은 되나요?</button>
-            <div class="faq-answer">
-                <p>최상의 기사님들로 배정되며, 80% 이상의 승률을 목표로 진행됩니다.</p>
-            </div>
+          <button class="faq-question">💰 환불 정책은 어떻게 되나요?</button>
+          <div class="faq-answer">
+            <p>작업이 시작되기 전에는 100% 환불이 가능하며, 진행 중에는 일부 환불이 가능합니다.</p>
+          </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">🔥 승률이 낮아도 작업 가능한가요?</button>
-            <div class="faq-answer">
-                <p>네, 가능합니다! 승률이 낮더라도 미코팀 기사님들의 실력으로 문제없이 작업 진행됩니다.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <button class="faq-question">🕒 작업 중간에 휴식 시간은 있나요?</button>
-            <div class="faq-answer">
-                <p>작업 특성상 연속 진행을 원칙으로 하지만, 요청하시면 특정 시간 휴식도 가능합니다.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <button class="faq-question">💬 진행 중에 기사님과 대화할 수 있나요?</button>
-            <div class="faq-answer">
-                <p>네, 카카오톡 또는 디스코드를 통해 실시간 소통이 가능합니다. 다만 게임 집중을 위해 최소한의 대화가 이루어질 수 있습니다.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <button class="faq-question">🚀 가장 빠른 작업 시간은 얼마나 걸리나요?</button>
-            <div class="faq-answer">
-                <p>최단 30분 내에 작업이 시작될 수 있으며, 당일 완성도 가능합니다!</p>
-            </div>
-        </div>
-        
-      
-        
-        <div class="faq-item">
-            <button class="faq-question">💳 결제 방법은 어떤 게 있나요?</button>
-            <div class="faq-answer">
-                <p>카카오페이, 계좌이체, 문화상품권 등 다양한 결제 수단을 지원합니다.</p>
-            </div>
-        </div>
-        
-
-        <div class="faq-item">
-            <button class="faq-question">🔒 계정 안전은 보장되나요?</button>
-            <div class="faq-answer">
-                <p>100% 수동 작업을 진행하며, 철저한 보안으로 계정 보호를 보장합니다.</p>
-            </div>
-        </div>
-
-     
-
-        <div class="faq-item">
-            <button class="faq-question">🚫 불법적인 서비스 (BJ 저격, 롤 토토, 어뷰징 등)도 진행하나요?</button>
-            <div class="faq-answer">
-                <p>아닙니다! 미코팀은 모든 서비스가 **공정한 게임 환경**을 유지하는 것을 원칙으로 합니다.</p>
-                <p>따라서, <strong>BJ 저격, 롤 토토(도박), 어뷰징, 헬퍼 등의 불법적인 행위</strong>와 관련된 서비스는 제공하지 않습니다.</p>
-                <p>또한, 앞으로도 해당 서비스는 절대 지원하지 않을 것을 확실히 약속드립니다.</p>
-                <p>⚠️ <strong>미코팀의 모든 서비스는 게임 산업 진흥법을 준수하며, 안전한 게임 이용을 최우선으로 고려합니다.</strong></p>
-            </div>
+          <button class="faq-question">⚡ 승률 보장은 되나요?</button>
+          <div class="faq-answer">
+            <p>최상의 기사님들로 배정되며, 80% 이상의 승률을 목표로 진행됩니다.</p>
+          </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">⚖️ 롤 대리 서비스, 불법인가요?</button>
-            <div class="faq-answer">
-                <p>미코팀에서 제공하는 모든 서비스는 <strong>게임산업진흥법을 엄격히 준수</strong>하여 운영됩니다.</p>
-                <p>저희는 <strong>불법적인 대리 행위가 아닌</strong>, 고객님의 실력 향상을 돕는 **게임 교육 및 코칭 형태**로 진행합니다.</p>
-                <p>따라서, 미코팀의 <strong>롤 대리, 롤 듀오, 롤 강의 등은 불법 서비스가 아님을 명확히 안내드립니다.</strong></p>
-                <p>⚠️ <strong>공정한 게임 환경 조성을 위해, 미코팀은 안전하고 합법적인 서비스만을 제공합니다.</strong></p>
-            </div>
+          <button class="faq-question">🔥 승률이 낮아도 작업 가능한가요?</button>
+          <div class="faq-answer">
+            <p>네, 가능합니다! 승률이 낮더라도 미코팀 기사님들의 실력으로 문제없이 작업 진행됩니다.</p>
+          </div>
         </div>
 
-    </div>
-</section>
+        <div class="faq-item">
+          <button class="faq-question">🕒 작업 중간에 휴식 시간은 있나요?</button>
+          <div class="faq-answer">
+            <p>작업 특성상 연속 진행을 원칙으로 하지만, 요청하시면 특정 시간 휴식도 가능합니다.</p>
+          </div>
+        </div>
 
-<footer class="happyteam-footer">
+        <div class="faq-item">
+          <button class="faq-question">💬 진행 중에 기사님과 대화할 수 있나요?</button>
+          <div class="faq-answer">
+            <p>네, 카카오톡 또는 디스코드를 통해 실시간 소통이 가능합니다. 다만 게임 집중을 위해 최소한의 대화가 이루어질 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">🚀 가장 빠른 작업 시간은 얼마나 걸리나요?</button>
+          <div class="faq-answer">
+            <p>최단 30분 내에 작업이 시작될 수 있으며, 당일 완성도 가능합니다!</p>
+          </div>
+        </div>
+
+
+
+        <div class="faq-item">
+          <button class="faq-question">💳 결제 방법은 어떤 게 있나요?</button>
+          <div class="faq-answer">
+            <p>카카오페이, 계좌이체, 문화상품권 등 다양한 결제 수단을 지원합니다.</p>
+          </div>
+        </div>
+
+
+        <div class="faq-item">
+          <button class="faq-question">🔒 계정 안전은 보장되나요?</button>
+          <div class="faq-answer">
+            <p>100% 수동 작업을 진행하며, 철저한 보안으로 계정 보호를 보장합니다.</p>
+          </div>
+        </div>
+
+
+
+        <div class="faq-item">
+          <button class="faq-question">🚫 불법적인 서비스 (BJ 저격, 롤 토토, 어뷰징 등)도 진행하나요?</button>
+          <div class="faq-answer">
+            <p>아닙니다! 미코팀은 모든 서비스가 **공정한 게임 환경**을 유지하는 것을 원칙으로 합니다.</p>
+            <p>따라서, <strong>BJ 저격, 롤 토토(도박), 어뷰징, 헬퍼 등의 불법적인 행위</strong>와 관련된 서비스는 제공하지 않습니다.</p>
+            <p>또한, 앞으로도 해당 서비스는 절대 지원하지 않을 것을 확실히 약속드립니다.</p>
+            <p>⚠️ <strong>미코팀의 모든 서비스는 게임 산업 진흥법을 준수하며, 안전한 게임 이용을 최우선으로 고려합니다.</strong></p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">⚖️ 롤 대리 서비스, 불법인가요?</button>
+          <div class="faq-answer">
+            <p>미코팀에서 제공하는 모든 서비스는 <strong>게임산업진흥법을 엄격히 준수</strong>하여 운영됩니다.</p>
+            <p>저희는 <strong>불법적인 대리 행위가 아닌</strong>, 고객님의 실력 향상을 돕는 **게임 교육 및 코칭 형태**로 진행합니다.</p>
+            <p>따라서, 미코팀의 <strong>롤 대리, 롤 듀오, 롤 강의 등은 불법 서비스가 아님을 명확히 안내드립니다.</strong></p>
+            <p>⚠️ <strong>공정한 게임 환경 조성을 위해, 미코팀은 안전하고 합법적인 서비스만을 제공합니다.</strong></p>
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+  <footer class="happyteam-footer">
     <div class="footer-content">
-        <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
-        <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
-        <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
-        <div class="footer-links">
-            <a href="#">서비스 이용약관</a> | 
-            <a href="#">개인정보 처리방침</a> | 
-            <a href="#">문의하기</a>
-        </div>
-        <p class="copyright">© 2024 MICO. All rights reserved.</p>
+      <img src="img/햄스터.webp" alt="미코팀 로고" class="footer-logo">
+      <h2>미코팀과 함께 최고의 플레이를 경험하세요!</h2>
+      <p>실력 향상부터 든든한 듀오까지, 미코팀이 여러분과 함께합니다.</p>
+      <div class="footer-links">
+        <a href="#">서비스 이용약관</a> |
+        <a href="#">개인정보 처리방침</a> |
+        <a href="#">문의하기</a>
+      </div>
+      <p class="copyright">© 2024 MICO. All rights reserved.</p>
     </div>
-</footer>
+  </footer>
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
-    const dropdown = dropdownToggle.closest('.dropdown');
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      const dropdown = dropdownToggle.closest('.dropdown');
 
-    dropdownToggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      dropdown.classList.toggle('open');
-    });
+      dropdownToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      });
 
-    // 외부 클릭 시 닫힘 처리
-    document.addEventListener('click', function (e) {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-      }
-    });
-  });
-
-  
-</script>
-
-
-
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.swiper-container', {
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
-    },
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    }
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const questions = document.querySelectorAll(".faq-question");
-
-    questions.forEach((question) => {
-      question.addEventListener("click", function () {
-        this.classList.toggle("active");
-
-        const answer = this.nextElementSibling;
-        if (answer.style.display === "block") {
-          answer.style.display = "none";
-        } else {
-          answer.style.display = "block";
+      // 외부 클릭 시 닫힘 처리
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
         }
       });
     });
-  });
-</script>
 
 
-<script type="module" src="/src/main.js"></script>
+  </script>
+
+
+
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper-container', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const questions = document.querySelectorAll(".faq-question");
+
+      questions.forEach((question) => {
+        question.addEventListener("click", function () {
+          this.classList.toggle("active");
+
+          const answer = this.nextElementSibling;
+          if (answer.style.display === "block") {
+            answer.style.display = "none";
+          } else {
+            answer.style.display = "block";
+          }
+        });
+      });
+    });
+  </script>
+
+
+  <script type="module" src="/src/main.js"></script>
 
 
 
 </body>
+
 </html>
