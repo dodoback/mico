@@ -13,45 +13,52 @@
 </head>
 
 <style>
-  .happyteam-reviews {
+ .happyteam-reviews {
   padding: 60px 20px;
   background: #111;
   color: white;
   text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.reviews-header h2 {
+.happyteam-reviews h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.reviews-header p {
+.happyteam-reviews p {
   font-size: 16px;
   color: #ccc;
   margin-bottom: 30px;
 }
 
-/* 후기 카드 3개 가로 정렬 */
+/* 카드 정렬 행 */
 .reviews-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap; /* 화면 작을 때 줄바꿈 허용 */
+  gap: 16px;
+  margin-bottom: 30px;
 }
 
+/* 카드 */
 .review-card {
   background: #1c1c1c;
   color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 280px;
+  width: 100%;
+  max-width: 300px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   font-size: 14px;
+  flex: 1 1 280px;
 }
 
-/* 버튼 영역 */
+/* 버튼 */
 .review-button-wrap {
-  margin-top: 30px;
+  text-align: center;
 }
 
 .btn-review {
@@ -64,18 +71,14 @@
   text-decoration: none;
 }
 
-/* 모바일 대응 */
+/* 모바일 최적화 */
 @media (max-width: 768px) {
-  .reviews-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
-
   .review-card {
-    flex: 0 0 auto;
+    max-width: 100%;
+    flex: 1 1 100%;
   }
 }
+
 
 </style>
 
