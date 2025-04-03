@@ -336,6 +336,53 @@
             color: #999;
             cursor: not-allowed;
         }
+
+
+
+        @media (max-width: 768px) {
+  .progress-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .progress-gallery {
+    grid-template-columns: repeat(2, 1fr); /* 태블릿/모바일에서 2열로 */
+    gap: 16px;
+  }
+
+  .progress-filter {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-gallery {
+    grid-template-columns: 1fr; /* 아주 작은 화면에서는 1열 */
+  }
+
+  .progress-card {
+    padding: 10px;
+  }
+
+  .progress-title {
+    font-size: 14px;
+  }
+
+  .pagination button {
+    padding: 5px 10px;
+  }
+
+  .progress-container {
+    padding: 16px;
+    gap: 24px;
+  }
+}
+
+
+
+
+        
     </style>
 
     <script>

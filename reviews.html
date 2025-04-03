@@ -646,6 +646,35 @@
 }
 
 
+@media (max-width: 768px) {
+  .review-table th,
+  .review-table td {
+    font-size: 12px;
+    white-space: nowrap;   /* 줄바꿈 방지 */
+    overflow: hidden;
+    text-overflow: ellipsis;  /* 너무 길면 ... 처리 */
+    padding: 8px 6px;
+  }
+
+  .review-title {
+    max-width: 160px;  /* 제목 길이 제한 */
+    display: inline-block;
+  }
+
+  .review-header-bar {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .review-header-bar input,
+  .review-header-bar button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+
 </style>
 
 
