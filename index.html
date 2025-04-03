@@ -12,6 +12,73 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 
+<style>
+  .happyteam-reviews {
+  padding: 60px 20px;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+.reviews-header h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.reviews-header p {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+/* 후기 카드 3개 가로 정렬 */
+.reviews-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap; /* 화면 작을 때 줄바꿈 허용 */
+}
+
+.review-card {
+  background: #1c1c1c;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  font-size: 14px;
+}
+
+/* 버튼 영역 */
+.review-button-wrap {
+  margin-top: 30px;
+}
+
+.btn-review {
+  display: inline-block;
+  background: #00c8ff;
+  color: black;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .reviews-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .review-card {
+    flex: 0 0 auto;
+  }
+}
+
+</style>
+
 <body>
   <header class="site-header">
     <a href="index.html" class="logo">미코팀<span></span></a>
