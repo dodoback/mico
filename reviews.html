@@ -674,6 +674,30 @@
   }
 }
 
+@media (max-width: 768px) {
+  .review-table {
+    font-size: 12px;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .review-table th,
+  .review-table td {
+    padding: 8px 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 각 열 너비 재조정 */
+  .review-table td:nth-child(1) { width: 8%; }   /* No */
+  .review-table td:nth-child(2) { width: 38%; }  /* 제목 */
+  .review-table td:nth-child(3) { width: 18%; }  /* 글쓴이 */
+  .review-table td:nth-child(4) { width: 20%; }  /* 작성시간 */
+  .review-table td:nth-child(5) { width: 16%; }  /* 조회수 */
+}
+
+
 
 </style>
 
